@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: haechan8864
+      MYSQL_DATABASE: studyping
+      TZ: Asia/Seoul
+    volumes:
+      - mysql-data:/var/lib/mysql
+    restart: always
+
+  backend:
+    container_name: backend-container
+    build:
+      context: ./back               # ⚠️ 여기 중요! 백엔드 전체 폴더가 build context로 들어감
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+    restart: always
+  frontend:
+    build: ./front
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+volumes:
+  mysql-data:
