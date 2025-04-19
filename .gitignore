@@ -1,0 +1,25 @@
+# Java / Gradle
+*.class
+*.jar
+*.war
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+.gradle/
+out/
+bin/
+
+# Node / React
+node_modules/
+build/
+dist/
+
+# IntelliJ
+.idea/
+*.iml
+
+# OS / 로그 / 기타
+.DS_Store
+.env
+*.log
+
+# Docker
