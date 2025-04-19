@@ -6,6 +6,7 @@ function App() {
     <div style={{ textAlign: 'center', marginTop: '100px' }}>
       <h1>🧠 StudyPing</h1>
       <p>프론트엔드가 성공적으로 연결되었습니다!</p>
+        <p>진짜 배포 된거냐?</p>
     </div>
   );
 }
