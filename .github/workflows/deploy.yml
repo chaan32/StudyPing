@@ -17,10 +17,8 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "$EC2_KEY" > ~/.ssh/id_ed25519
+          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-        env:
-          EC2_KEY: ${{ secrets.EC2_KEY }}
 
       - name: Add known hosts
         run: |
@@ -28,7 +26,7 @@ jobs:
 
       - name: Connect & deploy to EC2
         run: |
-          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             cd /home/ubuntu/StudyPing
             git pull origin main
             ./gradlew build
