@@ -17,45 +17,16 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "${PRIVATE_KEY}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-        env:
-          PRIVATE_KEY: |
-            -----BEGIN RSA PRIVATE KEY-----
-            MIIEpQIBAAKCAQEA3cu58oFP5/dgEjRwV/tk5pGRpLztaou0GPgOa7mVyRzKVcjU
-            I1r35PMGnLrLS2T31N7mOm33qsFGyKA02tKhgHEEun9nAjD+YnzkjzrJ+tMgPE9L
-            DZKldgvC8aSd3mkaI3eGcX1mfX0eHBbSCjgpHzUC2KJ6yvs2V6D3WgPDsMec2dxr
-            IoYo3f7yMFAVb6TWUczFrmAqY65UjJZnUl38Gq3wl49wDiJWdntTR0zdcSytv+Xt
-            MsUMq2IrRqcIILwgRsJ3vX3g59y+l3dWM7tfpuSAL6Rvqs64gypfk/02xxIn93OD
-            gjfN9OHJ9/LrwYJHtrqVFv4GmXtsHWByjyw2PQIDAQABAoIBAQC4vAki3WXqtXZF
-            c3vnLDK8gJ6ocdvllHrrGSEZxLfnjJ1SmjVnRUuYXHsza7oMEAsEOKvWGuXgSZ9l
-            V1rur+Voj7n6hEcN4jTfX1sXmUXGLrd4xCqlIXHDQsSadBwxtaTZyaInQOVuvBmq
-            F6/WZzSJE6RNP/e6vUZj8mRTizMhN3RHR11kMgk3AkWFu0Uxkz10gSJIeMwowsFQ
-            ynefs/pq2YdrjHEO4OlwiSXtmiQDL96e3Pj9nIjL7fbY9Ul/e0m/lh1h9bcskgWN
-            j9k+uSMZtzF1tjgpyzS3aPoOdpkUJOOLcWqqt+2Jpsr14lzbDMyjaIYx+5vQd00R
-            Pq+9oZiZAoGBAPeZOxgU4qEXBUqrphRg77KwJX50lzHVj29aI7v1f9QveNsvdNDg
-            nAls4yVR31tncAv8nLc0tTRbOAHxWF+NdCvYnv4LriAK4ZFvN+2WJ3h9hkOf3zgt
-            x33lXgb/oh4R0afsqU6U34kPTnixW5VxcZ+CcJH7ow5bG0dUkRgD8JCTAoGBAOVS
-            XAYrhAumnh/0F1Raw/axzXDFLlWVxS2cRUnZxQlbGRV+0n+b5Uc5gza3P9vaDRBM
-            kbBBBpg8/5e/Jahf7tUirfitMQsq9VUPdcA1tu/cqNscmT7N8ydumd3zt1RGZLxC
-            G1cwxctsHcJHdQ9u42uVEp4VzbGWCG+09E4YdO/vAoGAWpDuEKzzCMGG6f1HToT2
-            qIHN9Sdodo4LXUu3bnUqQM7sgiAltpGyAbCWlXwRGzoGvhu0pz7cWT5UikFhdfIj
-            4DXoUjyrgIT6ZVwtNPaLkYM4rVu5Jq94HRDdB+pRvnX+HlJuy5OhAF1c8sDNIyjP
-            yuzHiF5nEkU5ASppuEMYp4kCgYEArQHEoXcFCNEsLIk3bJGJlD0x8+ke+ryiZLWn
-            5H5h05whwYDLiDBx+pkeMBJyIAhSoMBTjXiRZBto7O/tlijCA5RFUf4/qOBA9GpU
-            eK1NlYqQ7bWWu7YewtoDRVrQLclpyEnLXK1UHBM2JFNKslkDRC/UOuXSKC87sCMB
-            yUVUO4sCgYEA6NVfOR0C0tfgm5dqwx1lXYbWBRPzqO7mAnRM5ykrnBiMtjqXZ6V3
-            olIglXJjY1JEipMeXF9hGl4NTNfiXl3984gpiSAbZNG2j1quUyl1wH/dj0lr7ZLB
-            HNNOOnnfe/NjC+HPeuRGeHWwJA03nYFlBvNWJzjcw3ZE+bKq2RuH5Zc=
-            -----END RSA PRIVATE KEY-----
+          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
 
       - name: Add known hosts
         run: |
-          ssh-keyscan -H 54.206.29.225 >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Connect & deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.206.29.225 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             cd /home/ubuntu/StudyPing
             git pull origin main
             ./gradlew build
