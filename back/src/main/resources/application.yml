@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update   # ?? ?? update, ???? validate ?? none
+      ddl-auto: create   # ?? ?? update, ???? validate ?? none
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
