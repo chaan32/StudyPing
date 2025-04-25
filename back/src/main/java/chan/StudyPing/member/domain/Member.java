@@ -18,7 +18,7 @@ public class Member {
     private Long id;
 
     // 정보
-    private String username;
+    private String name;
     private String password;
     private String nickname;
     private String email;
