@@ -24,3 +24,8 @@ spring:
 
 server:
   port: 8080
+
+jwt:
+#studypingaccesstokenstudypingaccesstokenstudypingaccesstokenstudypingaccesstokenstudypingaccesstokenstudypingaccesstokenstudypingaccesstoken
+  secretKey: c3R1ZHlwaW5nYWNjZXNzdG9rZW5zdHVkeXBpbmdhY2Nlc3N0b2tlbnN0dWR5cGluZ2FjY2Vzc3Rva2Vuc3R1ZHlwaW5nYWNjZXNzdG9rZW5zdHVkeXBpbmdhY2Nlc3N0b2tlbnN0dWR5cGluZ2FjY2Vzc3Rva2Vuc3R1ZHlwaW5nYWNjZXNzdG9rZW4=
+  expiration: 3000
