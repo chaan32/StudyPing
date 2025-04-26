@@ -4,18 +4,11 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { BookOpen, LogOut, MessageSquare } from "./icons/Icons"
 import { useAuth } from "../contexts/AuthContext"
-import LoginModal from "./LoginModal"
-import QuickLogin from "./QuickLogin"
 
 function Layout({ children }) {
   const navigate = useNavigate()
   const { user, isLoggedIn, logout } = useAuth()
-  const [showLoginModal, setShowLoginModal] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
-
-  const handleLoginClick = () => {
-    setShowLoginModal(true)
-  }
 
   const handleLogout = () => {
     logout()
@@ -80,12 +73,12 @@ function Layout({ children }) {
                 )}
               </div>
             ) : (
-              <button
-                onClick={handleLoginClick}
+              <Link
+                to="/login"
                 className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-md text-sm transition-all"
               >
                 로그인
-              </button>
+              </Link>
             )}
           </nav>
         </div>
@@ -107,12 +100,6 @@ function Layout({ children }) {
           </nav>
         </div>
       </footer>
-
-      {/* 모달 */}
-      {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
-
-      {/* 빠른 로그인 컴포넌트 추가 */}
-      <QuickLogin />
     </div>
   )
 }

@@ -8,25 +8,25 @@
 
  :: Spring Boot ::                (v3.4.4)
 
-2025-04-21T06:42:44.824Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Starting StudyPingApplication v0.0.1-SNAPSHOT using Java 21 with PID 1 (/app/app.jar started by root in /app)
-2025-04-21T06:42:44.827Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-04-21T06:42:45.137Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-04-21T06:42:45.145Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 3 ms. Found 0 JPA repository interfaces.
-2025-04-21T06:42:45.563Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-04-21T06:42:45.576Z  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-04-21T06:42:45.577Z  INFO 1 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
-2025-04-21T06:42:45.596Z  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-04-21T06:42:45.596Z  INFO 1 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 721 ms
-2025-04-21T06:42:45.702Z  INFO 1 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-04-21T06:42:45.729Z  INFO 1 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
-2025-04-21T06:42:45.747Z  INFO 1 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-04-21T06:42:45.914Z  INFO 1 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-04-21T06:42:45.943Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-04-21T06:42:46.064Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@54a056e4
-2025-04-21T06:42:46.066Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-04-21T06:42:46.090Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-04-21T06:42:46.091Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-04-21T06:42:46.100Z  INFO 1 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-04-25T14:18:09.888Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Starting StudyPingApplication v0.0.1-SNAPSHOT using Java 21 with PID 1 (/app/app.jar started by root in /app)
+2025-04-25T14:18:09.890Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-04-25T14:18:10.236Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-25T14:18:10.273Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 1 JPA repository interface.
+2025-04-25T14:18:10.737Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-25T14:18:10.747Z  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-25T14:18:10.747Z  INFO 1 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-25T14:18:10.765Z  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-25T14:18:10.766Z  INFO 1 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 834 ms
+2025-04-25T14:18:10.867Z  INFO 1 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-25T14:18:10.897Z  INFO 1 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-25T14:18:10.916Z  INFO 1 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-25T14:18:11.077Z  INFO 1 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-25T14:18:11.092Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-25T14:18:11.230Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4eb63dc8
+2025-04-25T14:18:11.232Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-25T14:18:11.261Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-25T14:18:11.262Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-25T14:18:11.272Z  INFO 1 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0
@@ -34,49 +34,23 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-04-21T06:42:46.602Z  INFO 1 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: alter table chat_message drop foreign key FKj52yap2xrm9u0721dct0tjor9
-Hibernate: alter table chat_message drop foreign key FKynfbnbqot8mpd1tquoc2s1w5
-Hibernate: alter table chat_participant drop foreign key FKqaqt420qk0puto2opt6st1u42
-Hibernate: alter table chat_participant drop foreign key FK6i9rcd4ojw7ih8tvi9wfsn4sx
-Hibernate: alter table chat_room drop foreign key FKc8epit87vb9uo5igsgcy0d5gf
-Hibernate: alter table read_status drop foreign key FK8xtwq2297wa0qvfsvj77roooy
-Hibernate: alter table read_status drop foreign key FKnak34qi4k43q18x6ck4nh1tmy
-Hibernate: alter table read_status drop foreign key FK5vcgyvaoi9mh5afb4eyyfi4xr
-Hibernate: alter table study drop foreign key FK53239jhoue0jai137hglj71ub
-Hibernate: drop table if exists chat_message
-Hibernate: drop table if exists chat_participant
-Hibernate: drop table if exists chat_room
-Hibernate: drop table if exists member
-Hibernate: drop table if exists read_status
-Hibernate: drop table if exists study
-Hibernate: create table chat_message (chat_room_id bigint not null, id bigint not null auto_increment, member_id bigint not null, content TEXT not null, primary key (id)) engine=InnoDB
-Hibernate: create table chat_participant (chat_room_id bigint not null, id bigint not null auto_increment, member_id bigint not null, primary key (id)) engine=InnoDB
-Hibernate: create table chat_room (id bigint not null auto_increment, study_id bigint, name varchar(255), type enum ('DIRECT','GROUP'), primary key (id)) engine=InnoDB
-Hibernate: create table member (id bigint not null auto_increment, email varchar(255), nickname varchar(255), password varchar(255), username varchar(255), role enum ('ADMIN','USER'), primary key (id)) engine=InnoDB
-Hibernate: create table read_status (is_read bit not null, chat_message_id bigint not null, chat_room_id bigint not null, id bigint not null auto_increment, member_id bigint not null, primary key (id)) engine=InnoDB
-Hibernate: create table study (current_members integer not null, max_members integer not null, id bigint not null auto_increment, writer_id bigint, description TEXT, title varchar(255), primary key (id)) engine=InnoDB
-Hibernate: alter table chat_room add constraint UKmabxj7i13d5qd9nb0rsgw2kuf unique (study_id)
-Hibernate: alter table chat_message add constraint FKj52yap2xrm9u0721dct0tjor9 foreign key (chat_room_id) references chat_room (id)
-Hibernate: alter table chat_message add constraint FKynfbnbqot8mpd1tquoc2s1w5 foreign key (member_id) references member (id)
-Hibernate: alter table chat_participant add constraint FKqaqt420qk0puto2opt6st1u42 foreign key (chat_room_id) references chat_room (id)
-Hibernate: alter table chat_participant add constraint FK6i9rcd4ojw7ih8tvi9wfsn4sx foreign key (member_id) references member (id)
-Hibernate: alter table chat_room add constraint FKc8epit87vb9uo5igsgcy0d5gf foreign key (study_id) references study (id)
-Hibernate: alter table read_status add constraint FK8xtwq2297wa0qvfsvj77roooy foreign key (chat_message_id) references chat_message (id)
-Hibernate: alter table read_status add constraint FKnak34qi4k43q18x6ck4nh1tmy foreign key (chat_room_id) references chat_room (id)
-Hibernate: alter table read_status add constraint FK5vcgyvaoi9mh5afb4eyyfi4xr foreign key (member_id) references member (id)
-Hibernate: alter table study add constraint FK53239jhoue0jai137hglj71ub foreign key (writer_id) references member (id)
-2025-04-21T06:42:47.066Z  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-04-21T06:42:47.123Z  WARN 1 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-04-21T06:42:47.365Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-04-21T06:42:47.376Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Started StudyPingApplication in 2.895 seconds (process running for 3.288)
-2025-04-21T06:45:09.917Z  INFO 1 --- [nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0};] that contained an invalid cookie. That cookie will be ignored.
- Note: further occurrences of this error will be logged at DEBUG level.
-2025-04-21T06:45:09.926Z  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-21T06:45:09.926Z  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-04-21T06:45:09.928Z  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2025-04-21T06:45:09.994Z  INFO 1 --- [nio-8080-exec-1] c.S.member.controller.TestController     : 들어왔다 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-04-21T06:45:18.963Z  INFO 1 --- [nio-8080-exec-4] c.S.member.controller.TestController     : 들어왔다 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-04-21T06:45:20.387Z  INFO 1 --- [nio-8080-exec-7] c.S.member.controller.TestController     : 들어왔다 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-04-21T06:45:21.314Z  INFO 1 --- [nio-8080-exec-8] c.S.member.controller.TestController     : 들어왔다 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-2025-04-21T06:45:36.622Z  INFO 1 --- [nio-8080-exec-1] c.S.member.controller.TestController     : 들어왔다 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-04-25T14:18:11.764Z  INFO 1 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-25T14:18:11.832Z  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-25T14:18:12.028Z  WARN 1 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-25T14:18:12.053Z  WARN 1 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 1d1d58be-1ed1-45fe-bb07-f2ee5def1ab1
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-04-25T14:18:12.057Z  INFO 1 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-25T14:18:12.330Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-25T14:18:12.342Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Started StudyPingApplication in 2.941 seconds (process running for 3.5)
+2025-04-25T14:18:30.905Z  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-25T14:18:30.906Z  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-25T14:18:30.911Z  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2025-04-25T14:19:57.253Z  INFO 1 --- [ionShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-25T14:19:57.265Z  INFO 1 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-04-25T14:19:57.277Z  INFO 1 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-25T14:19:57.283Z  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-04-25T14:19:57.293Z  INFO 1 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

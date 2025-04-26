@@ -1,8 +1,8 @@
 #!/bin/bash
 
 echo ""
-echo "🛠  Gradle 빌드 중... (테스트는 제외됨)"
-./gradlew clean build -x test
+echo "🔨 백엔드 빌드 중..."
+(cd back && ./gradlew clean build -x test)
 
 echo ""
 echo "🧹 기존 Docker 컨테이너 중단 중..."

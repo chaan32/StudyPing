@@ -18,10 +18,14 @@ public class Member {
     private Long id;
 
     // 정보
+    @Column(nullable = false)
     private String name;
+
+
     private String password;
     private String nickname;
     private String email;
+    // 이메일과 비밀번호를 통해서 로그인할 것
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
