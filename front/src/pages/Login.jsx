@@ -33,8 +33,8 @@ function Login() {
       
       console.log('로그인 요청 데이터:', requestData);
       
-      // 서버에 로그인 요청 보내기 (완전한 URL 사용)
-      const response = await fetch('http://localhost:8080/member/login', {
+      // 서버에 로그인 요청 보내기 (proxy 사용)
+      const response = await fetch('/member/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,18 +64,32 @@ function Login() {
       
       console.log('로그인 성공, 응답 데이터:', responseData);
       
-      console.log('로그인 성공, 응답 데이터:', responseData);
+      // 응답에서 토큰 확인 (백엔드에서 'token' 키로 전송하는 경우)
+      const token = responseData?.token || responseData?.accessToken;
       
-      // 사용자 데이터 구성
-      const userData = {
-        id: responseData?.id || 1,
-        name: responseData?.name || '사용자',
-        avatar: (responseData?.name || '사용').substring(0, 2),
-        email: email,
-      };
-      
-      // AuthContext의 login 함수 호출
-      login(userData)
+      if (token) {
+        // 사용자 데이터 구성
+        const userData = {
+          id: responseData.id || 1,
+          name: responseData.name || '사용자',
+          avatar: (responseData.name || '사용').substring(0, 2),
+          email: email,
+        };
+        
+        // AuthContext의 login 함수에 사용자 데이터와 토큰을 전달
+        login(userData, token)
+        console.log('JWT 토큰 저장 완료:', token)
+      } else {
+        // 사용자 데이터만 전달 (토큰 없는 경우)
+        const userData = {
+          id: responseData?.id || 1,
+          name: responseData?.name || '사용자',
+          avatar: (responseData?.name || '사용').substring(0, 2),
+          email: email,
+        };
+        login(userData)
+        console.warn('서버에서 토큰을 받지 못했습니다')
+      }
       
       navigate("/")
     } catch (err) {

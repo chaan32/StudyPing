@@ -5,10 +5,12 @@ import chan.StudyPing.member.dto.MemberLoginReqDto;
 import chan.StudyPing.member.dto.MemberSaveReqDto;
 import chan.StudyPing.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
@@ -31,6 +33,7 @@ public class MemberService {
     }
 
     public Member login(MemberLoginReqDto dto){
+        log.info("login inputDTO : {}", dto);
         Member member = memberRepository.findByEmail(dto.getEmail()).orElseThrow(
                 ()-> new IllegalArgumentException("존재하지 않는 이메일입니다."));
 

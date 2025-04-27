@@ -43,7 +43,7 @@ function Signup() {
       console.log('요청 데이터:', requestData);
       
       // 서버에 회원가입 요청 보내기 (완전한 URL 사용)
-      const response = await fetch('http://localhost:8080/member/create', {
+      const response = await fetch('/member/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

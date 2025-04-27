@@ -31,7 +31,10 @@ public class SecurityConfigs {
                 .csrf(AbstractHttpConfigurer::disable) // CSRF 보호 비활성화
                 .httpBasic(AbstractHttpConfigurer::disable) // HTTP Basic 비활성화 하기 - 토큰 기반의 인증을 할 것이기 떄문에 이거 필ㅇ 없음
                 // 인증처리 제외 URL 패턴
-                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/member/login", "/member/create").permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/test", "/member/login", "/member/create").permitAll()
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // 이 필터를 사용하기 전에 jwtAuthFilter를 사용하겠다.
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
