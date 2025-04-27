@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+    <h1>현재 시간: <span id="clock"></span></h1>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const formattedTime = now.toLocaleTimeString(); // 예: 10:45:30 AM
+            document.getElementById('clock').textContent = formattedTime;
+        }
+
+        // 1초마다 시간 업데이트
+        setInterval(updateClock, 1000);
+
+        // 처음 로드될 때도 시간 표시
+        updateClock();
+    </script>
+</body>
+</html>

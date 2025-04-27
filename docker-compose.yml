@@ -15,7 +15,7 @@ services:
   backend:
     container_name: backend-container
     build:
-      context: ./back               # ⚠️ 여기 중요! 백엔드 전체 폴더가 build context로 들어감
+      context: ./back
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
@@ -26,11 +26,6 @@ services:
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
     restart: always
-  frontend:
-    build: ./front
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
+
 volumes:
   mysql-data:
