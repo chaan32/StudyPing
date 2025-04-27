@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class JwtAuthFilter extends GenericFilter {
     @Value("${jwt.secretKey}")
     private String secretKey;
@@ -34,7 +36,8 @@ public class JwtAuthFilter extends GenericFilter {
 
         try{
             if (token!=null){ // 토큰이 있는 경우
-                if (!token.substring(0, 7).equals("Bearer")){
+                if (!token.substring(0, 7).equals("Bearer ")){
+                    log.info("input token : {}", token);
                     throw new AuthenticationServiceException("Bearer 형식이 ㄴㄴ");
                 }
                 String jwtToken = token.substring(7); //Bearer 떼고 토큰의 원본만 꺼냄
