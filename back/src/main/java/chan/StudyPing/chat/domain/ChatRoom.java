@@ -37,7 +37,7 @@ public class ChatRoom extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private ChatRoomType type; // GROUP or DIRECT
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "study_id")
     private Study study;
 

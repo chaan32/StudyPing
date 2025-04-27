@@ -1,6 +1,7 @@
 package chan.StudyPing.member.domain;
 
 
+import chan.StudyPing.study.domain.Study;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,5 +31,7 @@ public class Member {
     @Builder.Default
     private Role role = Role.USER;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Study study;
     // 생성 정보 및 수정 정보는 알아서 작성이 됨
 }

@@ -2,11 +2,14 @@
 
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 import Layout from "../components/Layout"
 import { ArrowLeft } from "../components/icons/Icons"
+import { useAuth } from "../contexts/AuthContext"
 
 function CreateStudyGroup() {
   const navigate = useNavigate()
+  const { authRequest } = useAuth()
   const [formData, setFormData] = useState({
     title: "",
     category: "",
@@ -20,14 +23,45 @@ function CreateStudyGroup() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Here you would typically send the data to your backend
-    console.log("Form submitted:", formData)
-
-    // For now, we'll just show an alert and redirect
-    alert("스터디 그룹이 성공적으로 생성되었습니다!")
-    navigate("/browse")
+    try {
+      // Get user data from localStorage
+      const userJson = localStorage.getItem('user')
+      
+      if (!userJson) {
+        alert("로그인이 필요합니다.")
+        navigate("/login")
+        return
+      }
+      
+      // Parse the user object and get the ID
+      const user = JSON.parse(userJson)
+      const makerId = user.id
+      
+      // Create request data with makerId
+      const requestData = {
+        ...formData,
+        maxParticipants: parseInt(formData.maxParticipants), // Convert to number
+        makerId: parseInt(makerId) // Convert to number
+      }
+      
+      console.log("Form submitted:", requestData)
+      
+      // 인증 토큰이 필요한 요청이므로 authRequest 함수 사용
+      const response = await authRequest('/study/create', {
+        method: 'post',
+        data: requestData
+      })
+      
+      console.log('Study group created:', response.data)
+      
+      alert("스터디 그룹이 성공적으로 생성되었습니다!")
+      navigate("/browse")
+    } catch (error) {
+      console.error('Error creating study group:', error)
+      alert("스터디 그룹 생성에 실패했습니다. 다시 시도해주세요.")
+    }
   }
 
   return (
@@ -81,12 +115,12 @@ function CreateStudyGroup() {
                     required
                   >
                     <option value="">카테고리 선택</option>
-                    <option value="programming">프로그래밍</option>
-                    <option value="language">외국어</option>
-                    <option value="job">취업 준비</option>
-                    <option value="certificate">자격증</option>
-                    <option value="reading">독서</option>
-                    <option value="other">기타</option>
+                    <option value="PROGRAMMING">프로그래밍</option>
+                    <option value="LANGUAGE">외국어</option>
+                    <option value="JOB">취업 준비</option>
+                    <option value="CERTIFICATE">자격증</option>
+                    <option value="READING">독서</option>
+                    <option value="OTHER">기타</option>
                   </select>
                 </div>
 
@@ -120,9 +154,9 @@ function CreateStudyGroup() {
                       required
                     >
                       <option value="">진행 방식 선택</option>
-                      <option value="online">온라인</option>
-                      <option value="offline">오프라인</option>
-                      <option value="hybrid">온/오프라인 혼합</option>
+                      <option value="ONLINE">온라인</option>
+                      <option value="OFFLINE">오프라인</option>
+                      <option value="BOTH">온/오프라인 혼합</option>
                     </select>
                   </div>
                 </div>
