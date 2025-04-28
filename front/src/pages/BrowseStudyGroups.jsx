@@ -1,95 +1,104 @@
-import { Link } from "react-router-dom"
-import Layout from "../components/Layout"
-import StudyCard from "../components/StudyCard"
-
-// Mock data for study groups
-const studyGroups = [
-  {
-    id: 1,
-    title: "알고리즘 스터디",
-    category: "프로그래밍",
-    description: "코딩 테스트 대비 알고리즘 문제 풀이 스터디입니다. 주 2회 온라인으로 진행됩니다.",
-    maxParticipants: 6,
-    currentParticipants: 3,
-    location: "온라인",
-    createdAt: "2024-04-15",
-  },
-  {
-    id: 2,
-    title: "토익 900점 목표 스터디",
-    category: "외국어",
-    description: "토익 900점 이상을 목표로 하는 스터디입니다. 매주 토요일 오프라인으로 만나 공부합니다.",
-    maxParticipants: 5,
-    currentParticipants: 4,
-    location: "오프라인",
-    createdAt: "2024-04-16",
-  },
-  {
-    id: 3,
-    title: "취업 면접 대비 스터디",
-    category: "취업 준비",
-    description: "IT 기업 면접 준비를 위한 스터디입니다. 모의 면접과 피드백을 주고받습니다.",
-    maxParticipants: 8,
-    currentParticipants: 5,
-    location: "온/오프라인 혼합",
-    createdAt: "2024-04-17",
-  },
-  {
-    id: 4,
-    title: "정보처리기사 자격증 스터디",
-    category: "자격증",
-    description: "정보처리기사 자격증 취득을 위한 스터디입니다. 함께 문제를 풀고 공부합니다.",
-    maxParticipants: 10,
-    currentParticipants: 7,
-    location: "온라인",
-    createdAt: "2024-04-18",
-  },
-  {
-    id: 5,
-    title: "월간 독서 모임",
-    category: "독서",
-    description: "매달 한 권의 책을 선정하여 읽고 토론하는 독서 모임입니다.",
-    maxParticipants: 12,
-    currentParticipants: 8,
-    location: "오프라인",
-    createdAt: "2024-04-19",
-  },
-  {
-    id: 6,
-    title: "주식 투자 스터디",
-    category: "기타",
-    description: "주식 투자에 관심 있는 분들과 함께 공부하고 정보를 공유하는 스터디입니다.",
-    maxParticipants: 7,
-    currentParticipants: 4,
-    location: "온라인",
-    createdAt: "2024-04-20",
-  },
-]
+import { Link } from "react-router-dom";
+import Layout from "../components/Layout";
+import StudyCard from "../components/StudyCard";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function BrowseStudyGroups() {
+  const [studyGroups, setStudyGroups] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchStudies = async () => {
+      try {
+        setLoading(true);
+        // 로컬 스토리지에서 accessToken 가져오기
+        const accessToken = localStorage.getItem('accessToken');
+        
+        // accessToken이 없으면 요청을 보내지 않음
+        if (!accessToken) {
+          setError('로그인이 필요한 서비스입니다. 로그인 후 이용해 주세요.');
+          setLoading(false);
+          return;
+        }
+        
+        // accessToken이 있을 때만 요청 전송
+        const response = await axios.get("/study/find/all", {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+          },
+          withCredentials: true
+        });
+        
+        // 응답 디버깅용 로그
+        console.log('백엔드 응답 데이터:', response.data);
+
+        if (response.data && response.data.studies) {
+          setStudyGroups(response.data.studies);
+        } else {
+          setStudyGroups([]);
+        }
+        setError(null);
+      } catch (err) {
+        console.error("스터디 조회 중 오류 발생:", err);
+        setError(
+          "스터디를 불러오는 중 오류가 발생했습니다. 다시 시도해 주세요."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStudies();
+  }, []);
+
   return (
     <Layout>
       <div className="py-12">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
-              <h1 className="text-2xl font-bold tracking-tight md:text-3xl">스터디 찾기</h1>
-              <p className="mt-2 text-gray-500">현재 모집 중인 스터디 그룹을 찾아보세요.</p>
+              <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
+                스터디 찾기
+              </h1>
+              <p className="mt-2 text-gray-500">
+                현재 모집 중인 스터디 그룹을 찾아보세요.
+              </p>
             </div>
-            <Link to="/create" className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-all">
+            <Link
+              to="/create"
+              className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md transition-all"
+            >
               새 스터디 만들기
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {studyGroups.map((group) => (
-              <StudyCard key={group.id} study={group} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="flex justify-center items-center h-40">
+              <p className="text-gray-500">스터디를 불러오는 중...</p>
+            </div>
+          ) : error ? (
+            <div className="flex justify-center items-center h-40">
+              <p className="text-red-500">{error}</p>
+            </div>
+          ) : studyGroups.length === 0 ? (
+            <div className="flex justify-center items-center h-40">
+              <p className="text-gray-500">등록된 스터디가 없습니다.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {studyGroups.map((group) => (
+                <StudyCard key={group.id} study={group} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </Layout>
-  )
+  );
 }
 
-export default BrowseStudyGroups
+export default BrowseStudyGroups;
