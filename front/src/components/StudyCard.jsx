@@ -24,7 +24,13 @@ function StudyCard({ study }) {
           </div>
           <div className="flex items-center gap-2">
             <Calendar className="h-4 w-4 text-gray-500" />
-            <span>생성일: {study.createdAt}</span>
+            <span>생성일: {study.createdAt ? study.createdAt.split('T')[0] : ''}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span>생성자: {study.makerName || '알 수 없음'}</span>
           </div>
         </div>
       </div>

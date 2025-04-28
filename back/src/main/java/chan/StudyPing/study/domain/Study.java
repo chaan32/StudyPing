@@ -66,7 +66,7 @@ public class Study extends BaseTimeEntity {
     private LocationCategory location;
 
     // 스터디를 만든 사람
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member maker;
 
     // 스터디에 참여하는 사람들
