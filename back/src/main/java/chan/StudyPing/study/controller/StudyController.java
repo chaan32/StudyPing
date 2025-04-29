@@ -3,6 +3,7 @@ package chan.StudyPing.study.controller;
 import chan.StudyPing.member.domain.Member;
 import chan.StudyPing.member.service.MemberService;
 import chan.StudyPing.study.domain.Study;
+import chan.StudyPing.study.domain.StudyMember;
 import chan.StudyPing.study.dto.StudyIncludeMembersResDto;
 import chan.StudyPing.study.dto.StudyReqDto;
 import chan.StudyPing.study.dto.StudyResDto;
@@ -48,7 +49,7 @@ public class StudyController {
         HashMap<String, Object> response = new HashMap<>();
         response.put("studies", resDtos);
         response.put("message", "모든 스터디 조회 성공");
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
@@ -62,7 +63,7 @@ public class StudyController {
         HashMap<String, Object> response = new HashMap<>();
         response.put("studies", resDtos);
         response.put("message", "모든 스터디 조회 성공");
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     //특정 스터디 조회하기
@@ -75,7 +76,7 @@ public class StudyController {
         HashMap<String, Object> response = new HashMap<>();
         response.put("study", dto);
         response.put("message", "스터디 조회 성공");
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     //스터디 참여하기
@@ -86,6 +87,19 @@ public class StudyController {
         studyService.join(study_id, member);
         HashMap<String, Object> response = new HashMap<>();
         response.put("message", "스터디 참여 성공");
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    // 참여한 스터디 조회하기
+    @GetMapping("/find/joined/{member_id}")
+    public ResponseEntity<?> findJoinedStudy(@PathVariable Long member_id){
+        log.info("try to find Studies which {} is joined", member_id);
+
+        Member member = memberService.findById(member_id);
+        List<StudyMember> studyMembers = studyService.findByMember(member);
+        List<StudyResDto> resDtos = studyService.convertStudyMemberToDto(studyMembers);
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("studyList", resDtos);
+        response.put("message", "참여 중인 스터디 조회 성공");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

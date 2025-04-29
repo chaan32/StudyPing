@@ -8,25 +8,25 @@
 
  :: Spring Boot ::                (v3.4.4)
 
-2025-04-29T10:03:37.738Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Starting StudyPingApplication v0.0.1-SNAPSHOT using Java 21 with PID 1 (/app/app.jar started by root in /app)
-2025-04-29T10:03:37.743Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-04-29T10:03:39.022Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-04-29T10:03:41.185Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2118 ms. Found 3 JPA repository interfaces.
-2025-04-29T10:03:43.052Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-04-29T10:03:43.068Z  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-04-29T10:03:43.069Z  INFO 1 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
-2025-04-29T10:03:43.104Z  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-04-29T10:03:43.105Z  INFO 1 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5284 ms
-2025-04-29T10:03:43.237Z  INFO 1 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-04-29T10:03:43.271Z  INFO 1 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
-2025-04-29T10:03:43.293Z  INFO 1 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-04-29T10:03:43.472Z  INFO 1 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-04-29T10:03:43.489Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-04-29T10:03:43.658Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@261275ae
-2025-04-29T10:03:43.660Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-04-29T10:03:43.694Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-04-29T10:03:43.695Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-04-29T10:03:43.707Z  INFO 1 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-04-29T10:56:28.091Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Starting StudyPingApplication v0.0.1-SNAPSHOT using Java 21 with PID 1 (/app/app.jar started by root in /app)
+2025-04-29T10:56:28.093Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-04-29T10:56:28.480Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-29T10:56:28.522Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 3 JPA repository interfaces.
+2025-04-29T10:56:28.988Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-04-29T10:56:28.999Z  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-04-29T10:56:28.999Z  INFO 1 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-04-29T10:56:29.016Z  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-04-29T10:56:29.017Z  INFO 1 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 883 ms
+2025-04-29T10:56:29.208Z  INFO 1 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-29T10:56:29.253Z  INFO 1 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-04-29T10:56:29.285Z  INFO 1 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-04-29T10:56:29.698Z  INFO 1 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-29T10:56:29.718Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-04-29T10:56:29.877Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3e39e0fb
+2025-04-29T10:56:29.878Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-04-29T10:56:29.906Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-29T10:56:29.906Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-29T10:56:29.915Z  INFO 1 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0
@@ -34,160 +34,175 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-04-29T10:03:44.386Z  INFO 1 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-04-29T10:03:44.475Z  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-04-29T10:03:44.890Z  WARN 1 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-04-29T10:03:44.918Z  WARN 1 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+2025-04-29T10:56:30.724Z  INFO 1 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-29T10:56:30.907Z  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-29T10:56:31.260Z  WARN 1 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-04-29T10:56:31.281Z  WARN 1 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: 31610be8-3f05-4e0c-868e-c0e0e1fc3e6c
+Using generated security password: f4ad4613-af81-4c88-a5f4-9ac1df768d7c
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-04-29T10:03:44.926Z  INFO 1 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2025-04-29T10:03:45.015Z  INFO 1 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2025-04-29T10:03:45.372Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-04-29T10:03:45.394Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Started StudyPingApplication in 8.175 seconds (process running for 8.526)
-2025-04-29T10:03:58.979Z  INFO 1 --- [nio-8080-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0};] that contained an invalid cookie. That cookie will be ignored.
+2025-04-29T10:56:31.287Z  INFO 1 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-04-29T10:56:31.380Z  INFO 1 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2025-04-29T10:56:31.779Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-04-29T10:56:31.872Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Started StudyPingApplication in 4.123 seconds (process running for 4.765)
+2025-04-29T11:08:49.552Z  INFO 1 --- [nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0};] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2025-04-29T10:03:59.008Z  INFO 1 --- [nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-29T10:03:59.009Z  INFO 1 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-04-29T10:03:59.011Z  INFO 1 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2025-04-29T10:03:59.122Z  INFO 1 --- [nio-8080-exec-2] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=1@1, password=1)
-2025-04-29T10:03:59.123Z  INFO 1 --- [nio-8080-exec-2] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=1@1, password=1)
+2025-04-29T11:08:49.571Z  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-29T11:08:49.571Z  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-04-29T11:08:49.588Z  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 15 ms
+2025-04-29T11:08:49.790Z  INFO 1 --- [nio-8080-exec-1] c.S.study.controller.StudyController     : try to find all study
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+2025-04-29T11:08:50.123Z  INFO 1 --- [nio-8080-exec-3] c.S.study.controller.StudyController     : try to find all study
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+2025-04-29T11:08:53.889Z  INFO 1 --- [nio-8080-exec-6] c.S.study.controller.StudyController     : try to find study by id : 2
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+2025-04-29T11:08:53.958Z  INFO 1 --- [nio-8080-exec-2] c.S.study.controller.StudyController     : try to find study by id : 2
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+2025-04-29T11:17:24.945Z  INFO 1 --- [nio-8080-exec-8] c.S.study.controller.StudyController     : try to find all study
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+2025-04-29T11:17:25.033Z  INFO 1 --- [nio-8080-exec-5] c.S.study.controller.StudyController     : try to find all study
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+2025-04-29T11:32:33.830Z  INFO 1 --- [nio-8080-exec-4] c.S.study.controller.StudyController     : try to find Studies which 2 is joined
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:43:31.415Z  INFO 1 --- [nio-8080-exec-8] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=2@2, password=2)
+2025-04-29T11:43:31.419Z  INFO 1 --- [nio-8080-exec-8] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=2@2, password=2)
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-2025-04-29T10:04:01.323Z  INFO 1 --- [nio-8080-exec-3] c.S.study.controller.StudyController     : try to find all study
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+2025-04-29T11:45:35.543Z  INFO 1 --- [nio-8080-exec-5] c.S.study.controller.StudyController     : try to find Studies which 2 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:04:01.392Z  INFO 1 --- [nio-8080-exec-4] c.S.study.controller.StudyController     : try to find all study
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:45:37.222Z  INFO 1 --- [nio-8080-exec-9] c.S.study.controller.StudyController     : try to find Studies which 2 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:04:02.911Z  INFO 1 --- [nio-8080-exec-5] c.S.study.controller.StudyController     : try to find study by id : 1
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:45:40.556Z  INFO 1 --- [nio-8080-exec-7] c.S.study.controller.StudyController     : try to find Studies which 2 is joined
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:45:40.791Z  INFO 1 --- [nio-8080-exec-4] c.S.study.controller.StudyController     : try to find Studies which 2 is joined
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:46:21.343Z  INFO 1 --- [io-8080-exec-10] c.S.study.controller.StudyController     : try to find study by id : 2
 Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
 Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:04:02.940Z  INFO 1 --- [nio-8080-exec-1] c.S.study.controller.StudyController     : try to find study by id : 1
+2025-04-29T11:46:21.403Z  INFO 1 --- [nio-8080-exec-1] c.S.study.controller.StudyController     : try to find study by id : 2
 Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
 Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:04:18.052Z  INFO 1 --- [nio-8080-exec-7] c.S.study.controller.StudyController     : try to find study by id : 1
-Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:05:35.439Z  INFO 1 --- [nio-8080-exec-9] c.S.study.controller.StudyController     : try to find study by id : 1
-Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:05:35.571Z  INFO 1 --- [nio-8080-exec-8] c.S.study.controller.StudyController     : try to find study by id : 1
-Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:05:43.077Z  INFO 1 --- [nio-8080-exec-2] c.S.study.controller.StudyController     : try to find all study
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:05:43.151Z  INFO 1 --- [nio-8080-exec-3] c.S.study.controller.StudyController     : try to find all study
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:05:45.265Z  INFO 1 --- [nio-8080-exec-4] c.S.study.controller.StudyController     : try to find study by id : 1
-Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:05:45.302Z  INFO 1 --- [nio-8080-exec-5] c.S.study.controller.StudyController     : try to find study by id : 1
-Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:05:53.177Z  INFO 1 --- [nio-8080-exec-1] c.S.study.controller.StudyController     : try to join study : 1
+2025-04-29T11:46:31.196Z  INFO 1 --- [nio-8080-exec-3] c.S.study.controller.StudyController     : try to join study : 2
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
 Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
 Hibernate: select sm1_0.id from study_member sm1_0 where sm1_0.study_id=? and sm1_0.member_id=? limit ?
-2025-04-29T10:07:29.533Z  INFO 1 --- [io-8080-exec-10] c.S.member.controller.MemberController   : 회원가입 요청: MemberSaveReqDto(name=3@3, email=3@3, password=3)
+2025-04-29T11:46:46.281Z  INFO 1 --- [nio-8080-exec-8] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=1@1, password=1)
+2025-04-29T11:46:46.284Z  INFO 1 --- [nio-8080-exec-8] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=1@1, password=1)
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-Hibernate: insert into member (email,name,nickname,password,role) values (?,?,?,?,?)
-2025-04-29T10:07:33.087Z  INFO 1 --- [nio-8080-exec-9] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=3@3, password=3)
-2025-04-29T10:07:33.088Z  INFO 1 --- [nio-8080-exec-9] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=3@3, password=3)
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-2025-04-29T10:07:34.882Z  INFO 1 --- [nio-8080-exec-8] c.S.study.controller.StudyController     : try to find all study
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+2025-04-29T11:46:48.053Z  INFO 1 --- [nio-8080-exec-5] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:07:34.913Z  INFO 1 --- [nio-8080-exec-2] c.S.study.controller.StudyController     : try to find all study
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:07:36.342Z  INFO 1 --- [nio-8080-exec-3] c.S.study.controller.StudyController     : try to find study by id : 1
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
 Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
+2025-04-29T11:46:48.091Z  INFO 1 --- [nio-8080-exec-9] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:07:36.385Z  INFO 1 --- [nio-8080-exec-4] c.S.study.controller.StudyController     : try to find study by id : 1
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
 Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
+2025-04-29T11:47:11.964Z  INFO 1 --- [nio-8080-exec-4] c.S.study.controller.StudyController     : try to create study : StudyReqDto(title=스터디 제목, category=JOB, maxParticipants=7, location=OFFLINE, description=스터디 소개, makerId=1)
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:07:37.821Z  INFO 1 --- [nio-8080-exec-5] c.S.study.controller.StudyController     : try to join study : 1
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-Hibernate: select sm1_0.id from study_member sm1_0 where sm1_0.study_id=? and sm1_0.member_id=? limit ?
+Hibernate: insert into study (category,created_time,current_members,description,location,maker_id,max_participants,title,updated_time) values (?,?,?,?,?,?,?,?,?)
 Hibernate: insert into study_member (created_time,member_id,role,study_id,updated_time) values (?,?,?,?,?)
-Hibernate: update study set category=?,current_members=?,description=?,location=?,maker_id=?,max_participants=?,title=?,updated_time=? where id=?
-2025-04-29T10:07:49.067Z  INFO 1 --- [nio-8080-exec-1] c.S.study.controller.StudyController     : try to find all study
+2025-04-29T11:47:13.911Z  INFO 1 --- [io-8080-exec-10] c.S.study.controller.StudyController     : try to find all study
 Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
 Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:07:49.129Z  INFO 1 --- [nio-8080-exec-6] c.S.study.controller.StudyController     : try to find all study
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
 Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:07:52.379Z  INFO 1 --- [nio-8080-exec-7] c.S.study.controller.StudyController     : try to find study by id : 1
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+2025-04-29T11:47:13.945Z  INFO 1 --- [nio-8080-exec-1] c.S.study.controller.StudyController     : try to find all study
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+2025-04-29T11:47:17.681Z  INFO 1 --- [nio-8080-exec-6] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
 Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:07:52.407Z  INFO 1 --- [io-8080-exec-10] c.S.study.controller.StudyController     : try to find study by id : 1
 Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
+2025-04-29T11:47:17.713Z  INFO 1 --- [nio-8080-exec-2] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:50:07.449Z  INFO 1 --- [nio-8080-exec-8] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:50:07.918Z  INFO 1 --- [nio-8080-exec-5] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:08:06.649Z  INFO 1 --- [nio-8080-exec-9] c.S.study.controller.StudyController     : try to find all study
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:51:10.086Z  INFO 1 --- [nio-8080-exec-9] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:08:06.670Z  INFO 1 --- [nio-8080-exec-8] c.S.study.controller.StudyController     : try to find all study
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:51:10.267Z  INFO 1 --- [nio-8080-exec-7] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:08:12.126Z  INFO 1 --- [nio-8080-exec-2] c.S.study.controller.StudyController     : controller - selected category : LANGUAGE
-2025-04-29T10:08:12.127Z  INFO 1 --- [nio-8080-exec-2] c.StudyPing.study.service.StudyService   : service - selected category : LANGUAGE
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 where s1_0.category=?
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:51:13.663Z  INFO 1 --- [nio-8080-exec-4] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:08:12.823Z  INFO 1 --- [nio-8080-exec-3] c.S.study.controller.StudyController     : controller - selected category : JOB
-2025-04-29T10:08:12.824Z  INFO 1 --- [nio-8080-exec-3] c.StudyPing.study.service.StudyService   : service - selected category : JOB
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 where s1_0.category=?
-2025-04-29T10:08:13.696Z  INFO 1 --- [nio-8080-exec-4] c.S.study.controller.StudyController     : controller - selected category : CERTIFICATE
-2025-04-29T10:08:13.697Z  INFO 1 --- [nio-8080-exec-4] c.StudyPing.study.service.StudyService   : service - selected category : CERTIFICATE
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 where s1_0.category is null
-2025-04-29T10:08:14.404Z  INFO 1 --- [nio-8080-exec-5] c.S.study.controller.StudyController     : controller - selected category : LANGUAGE
-2025-04-29T10:08:14.404Z  INFO 1 --- [nio-8080-exec-5] c.StudyPing.study.service.StudyService   : service - selected category : LANGUAGE
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 where s1_0.category=?
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:51:13.731Z  INFO 1 --- [io-8080-exec-10] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-2025-04-29T10:08:14.806Z  INFO 1 --- [nio-8080-exec-1] c.S.study.controller.StudyController     : controller - selected category : PROGRAMMING
-2025-04-29T10:08:14.807Z  INFO 1 --- [nio-8080-exec-1] c.StudyPing.study.service.StudyService   : service - selected category : PROGRAMMING
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 where s1_0.category=?
-2025-04-29T10:08:15.479Z  INFO 1 --- [nio-8080-exec-6] c.S.study.controller.StudyController     : try to find all study
-Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:51:33.729Z  INFO 1 --- [nio-8080-exec-1] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=2@2, password=2)
+2025-04-29T11:51:33.737Z  INFO 1 --- [nio-8080-exec-1] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=2@2, password=2)
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
+2025-04-29T11:51:35.707Z  INFO 1 --- [nio-8080-exec-3] c.S.study.controller.StudyController     : try to find Studies which 2 is joined
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+2025-04-29T11:51:35.786Z  INFO 1 --- [nio-8080-exec-6] c.S.study.controller.StudyController     : try to find Studies which 2 is joined
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
