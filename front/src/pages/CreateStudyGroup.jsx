@@ -120,7 +120,7 @@ function CreateStudyGroup() {
                     <option value="JOB">취업 준비</option>
                     <option value="CERTIFICATE">자격증</option>
                     <option value="READING">독서</option>
-                    <option value="OTHER">기타</option>
+                    <option value="ETC">기타</option>
                   </select>
                 </div>
 

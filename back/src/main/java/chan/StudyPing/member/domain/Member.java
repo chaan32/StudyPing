@@ -1,12 +1,14 @@
 package chan.StudyPing.member.domain;
 
-
-import chan.StudyPing.study.domain.Study;
+import chan.StudyPing.study.domain.StudyMember;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -31,7 +33,12 @@ public class Member {
     @Builder.Default
     private Role role = Role.USER;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Study study;
-    // 생성 정보 및 수정 정보는 알아서 작성이 됨
+    // 멤버가 참여하는 스터디들
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudyMember> studyMembers = new ArrayList<>();
+
+    // 필요한 경우 스터디 참여 메소드 추가
+    public void joinStudy(StudyMember studyMember) {
+        this.studyMembers.add(studyMember);
+    }
 }

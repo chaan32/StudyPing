@@ -6,7 +6,7 @@ public enum StudyCategory {
     JOB("취업 준비"),
     CERTIFICATE("자격증"),
     READING("독서"),
-    OTHER("기타");
+    ETC("기타");
 
     private final String description;
 

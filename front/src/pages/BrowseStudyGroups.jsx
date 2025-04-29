@@ -1,13 +1,33 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import StudyCard from "../components/StudyCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+// 카테고리 변환 매핑 (한글 -> 영문 대문자)
+const categoryMapping = {
+  "전체": "ALL",
+  "프로그래밍": "PROGRAMMING",
+  "외국어": "LANGUAGE",
+  "취업 준비": "JOB",
+  "자격증": "CERTIFICATE",
+  "독서": "READING",
+  "기타": "ETC"
+};
+
+// 인기 카테고리 목록 (한글)
+const popularCategories = Object.keys(categoryMapping);
+
 function BrowseStudyGroups() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const categoryParam = searchParams.get('category') || '전체';
+  
+  // URL에서 가져온 카테고리를 기본값으로 설정
   const [studyGroups, setStudyGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(categoryParam);
 
   useEffect(() => {
     const fetchStudies = async () => {
@@ -23,8 +43,14 @@ function BrowseStudyGroups() {
           return;
         }
         
+        // 카테고리에 따른 엔드포인트 선택 및 한글 카테고리를 영문 대문자로 변환
+        const categoryForBackend = categoryMapping[selectedCategory] || selectedCategory;
+        const endpoint = selectedCategory === "전체" 
+          ? "/study/find/all" 
+          : `/study/find/category/${categoryForBackend}`;
+
         // accessToken이 있을 때만 요청 전송
-        const response = await axios.get("/study/find/all", {
+        const response = await axios.get(endpoint, {
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
@@ -53,7 +79,7 @@ function BrowseStudyGroups() {
     };
 
     fetchStudies();
-  }, []);
+  }, [selectedCategory]); // 카테고리가 변경되면 다시 호출
 
   return (
     <Layout>
@@ -74,6 +100,28 @@ function BrowseStudyGroups() {
             >
               새 스터디 만들기
             </Link>
+          </div>
+
+          {/* 인기 카테고리 섹션 */}
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold mb-4">인기 스터디 카테고리</h2>
+            <div className="flex flex-wrap gap-2">
+              {popularCategories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    // URL 파라미터 업데이트
+                    navigate(`?category=${encodeURIComponent(category)}`, { replace: true });
+                  }}
+                  className={`px-3 py-1 rounded-full border transition-all ${selectedCategory === category
+                    ? 'bg-blue-500 text-white border-blue-500'
+                    : 'bg-white text-gray-800 border-gray-300 hover:border-blue-400'}`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
 
           {loading ? (

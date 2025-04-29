@@ -69,10 +69,22 @@ public class Study extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member maker;
 
-    // 스터디에 참여하는 사람들
-    @OneToMany(mappedBy = "study")
-    private List<Member> members = new ArrayList<>();
+    // 스터디 멤버십 관리
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudyMember> studyMembers = new ArrayList<>();
+
 
     @OneToOne(mappedBy = "study")
     private ChatRoom chatRoom;
+
+    // 멤버 추가 메소드 수정
+    public void addStudyMember(StudyMember studyMember) {
+        this.studyMembers.add(studyMember);
+        this.currentMembers++;
+    }
+
+    public Boolean isFull() {
+        return this.currentMembers >= this.maxParticipants;
+    }
+
 }
