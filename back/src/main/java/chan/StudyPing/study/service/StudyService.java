@@ -50,7 +50,7 @@ public class StudyService {
                 .member(member)
                 .role(StudyRole.Leader)
                 .build();
-
+        studyMemberRepository.save(studyMember);
         return newStudy;
     }
 
@@ -92,6 +92,21 @@ public class StudyService {
                         .build())
                 .toList();
     }
+    public List<StudyResDto> convertStudyMemberToDto(List<StudyMember> list){
+        return list.stream()
+                .map(studyMember -> StudyResDto.builder()
+                                .id(studyMember.getStudy().getId())
+                                .title(studyMember.getStudy().getTitle())
+                                .description(studyMember.getStudy().getDescription())
+                                .category(studyMember.getStudy().getCategory().getDescription())
+                                .maxParticipants(studyMember.getStudy().getMaxParticipants())
+                                .currentParticipants(studyMember.getStudy().getCurrentMembers())
+                                .location(studyMember.getStudy().getLocation().getDescription())
+                                .createdAt(studyMember.getStudy().getCreatedTime())
+                                .role(studyMember.getRole())
+                                .build())
+                .toList();
+    }
 
     public StudyResDto convertToDto(Study study) {
         return StudyResDto.builder()
@@ -129,6 +144,11 @@ public class StudyService {
                 .build();
         return dto;
     }
+    // 특정 멤버가 참여한 스터디 찾기
+    public List<StudyMember> findByMember(Member member){
+        return studyMemberRepository.findByMemberId(member.getId());
+    }
+
 
 
 

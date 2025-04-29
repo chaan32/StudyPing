@@ -2,6 +2,7 @@ package chan.StudyPing.study.dto;
 
 import chan.StudyPing.study.domain.LocationCategory;
 import chan.StudyPing.study.domain.StudyCategory;
+import chan.StudyPing.study.domain.StudyRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,4 +24,5 @@ public class StudyResDto {
     private String location;
     private String makerName;
     private LocalDateTime createdAt;
+    private StudyRole role;
 }
