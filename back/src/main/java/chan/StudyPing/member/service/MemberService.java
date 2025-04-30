@@ -35,11 +35,11 @@ public class MemberService {
     public Member login(MemberLoginReqDto dto){
         log.info("login inputDTO : {}", dto);
         Member member = memberRepository.findByEmail(dto.getEmail()).orElseThrow(
-                ()-> new IllegalArgumentException("존재하지 않는 이메일입니다."));
+                ()-> new IllegalArgumentException("로그인 - 존재하지 않는 이메일입니다."));
 
         // 암호화된 비밀번호와 입력한 비밀번호를 암호화한 것과 비교를 통해서 일치 여부를 확인 함
         if (!passwordEncoder.matches(dto.getPassword(), member.getPassword())){
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            throw new IllegalArgumentException("로그인 - 비밀번호가 일치하지 않습니다.");
         }
 
         return member;
@@ -47,7 +47,7 @@ public class MemberService {
 
     public Member findById(Long id){
         return memberRepository.findById(id).orElseThrow(
-                ()-> new IllegalArgumentException("존재하지 않는 회원입니다."));
+                ()-> new IllegalArgumentException("memberService : 존재하지 않는 회원입니다."));
     }
 }
 

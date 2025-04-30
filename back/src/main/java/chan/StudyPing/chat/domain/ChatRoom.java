@@ -44,4 +44,11 @@ public class ChatRoom extends BaseTimeEntity {
     @Column(nullable = true)
     @OneToMany(mappedBy = "chatRoom")
     private List<ChatParticipant> participants = new ArrayList<>();
+
+    public void setParticipants(List<ChatParticipant> participants) {
+        this.participants = participants;
+    }
+    public void addParticipant(ChatParticipant participant) {
+        this.participants.add(participant);
+    }
 }

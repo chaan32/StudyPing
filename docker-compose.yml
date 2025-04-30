@@ -1,7 +1,7 @@
 services:
   mysql:
     image: mysql:8.0
-    container_name: mysql-container
+    container_name: mysql
     ports:
       - "3306:3306"
     environment:
@@ -11,6 +11,8 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     restart: always
+    networks:
+      - studyping-network
 
   backend:
     container_name: backend-container
@@ -21,11 +23,32 @@ services:
       - "8080:8080"
     depends_on:
       - mysql
+      - redis
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_REDIS_HOST: ${SPRING_REDIS_HOST}
+      SPRING_REDIS_PORT: ${SPRING_REDIS_PORT}
     restart: always
+    networks:
+      - studyping-network
+    env_file:
+      - .env
+
+  redis:
+    image: redis:7.2
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - studyping-network
 
 volumes:
   mysql-data:
+
+networks:
+  studyping-network:
+    driver: bridge
+
+

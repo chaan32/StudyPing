@@ -1,5 +1,6 @@
 package chan.StudyPing.study.controller;
 
+import chan.StudyPing.chat.service.ChatService;
 import chan.StudyPing.member.domain.Member;
 import chan.StudyPing.member.service.MemberService;
 import chan.StudyPing.study.domain.Study;
@@ -24,6 +25,7 @@ import java.util.List;
 public class StudyController {
     private final StudyService studyService;
     private final MemberService memberService;
+    private final ChatService chatService;
 
     //스터디 생성하기
     @PostMapping("/create")
@@ -33,6 +35,8 @@ public class StudyController {
         Member maker = memberService.findById(studyReqDto.getMakerId());
 
         Study study = studyService.createStudy(studyReqDto, maker);
+        chatService.createChatRoom(study);
+
         HashMap<String, Object> response = new HashMap<>();
         response.put("study_id", study.getId());
         response.put("message", "스터디 생성 성공");
@@ -85,6 +89,9 @@ public class StudyController {
         log.info("try to join study : {}", study_id);
         Member member = memberService.findById(member_id);
         studyService.join(study_id, member);
+        chatService.joinChatRoom(study_id, member_id);
+
+
         HashMap<String, Object> response = new HashMap<>();
         response.put("message", "스터디 참여 성공");
         return new ResponseEntity<>(response, HttpStatus.OK);
