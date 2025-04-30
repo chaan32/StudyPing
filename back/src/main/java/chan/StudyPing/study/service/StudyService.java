@@ -92,6 +92,7 @@ public class StudyService {
                         .build())
                 .toList();
     }
+
     public List<StudyResDto> convertStudyMemberToDto(List<StudyMember> list){
         return list.stream()
                 .map(studyMember -> StudyResDto.builder()
@@ -144,14 +145,12 @@ public class StudyService {
                 .build();
         return dto;
     }
+
+
     // 특정 멤버가 참여한 스터디 찾기
     public List<StudyMember> findByMember(Member member){
         return studyMemberRepository.findByMemberId(member.getId());
     }
-
-
-
-
 
 
     // 모든 스터디 찾기
@@ -195,4 +194,7 @@ public class StudyService {
         return studyRepository.findByCategory(stc);
     }
 
+    public List<StudyMember> findStudyMemberByStudyId(Long studyId){
+        return studyMemberRepository.findByStudyId(studyId);
+    }
 }

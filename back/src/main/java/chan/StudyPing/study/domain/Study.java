@@ -87,4 +87,7 @@ public class Study extends BaseTimeEntity {
         return this.currentMembers >= this.maxParticipants;
     }
 
+    public void setChatRoom(ChatRoom chatRoom) {
+        this.chatRoom = chatRoom;
+    }
 }
