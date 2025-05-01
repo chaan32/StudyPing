@@ -18,40 +18,39 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-@Configuration // Spring의 설정 클래스를 나타내는 어노테이션
+@Configuration
 @RequiredArgsConstructor
 public class SecurityConfigs {
     private final JwtAuthFilter jwtAuthFilter;
 
-    // Bean으로 등록된 객체를 싱글톤으로 만들다
     @Bean
     public SecurityFilterChain myFilter(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .cors(cors->cors.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable) // CSRF 보호 비활성화
-                .httpBasic(AbstractHttpConfigurer::disable) // HTTP Basic 비활성화 하기 - 토큰 기반의 인증을 할 것이기 떄문에 이거 필ㅇ 없음
-                // 인증처리 제외 URL 패턴
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/test", "/member/login", "/member/create").permitAll()
-                        .anyRequest().authenticated()
-                )
+                .csrf(AbstractHttpConfigurer::disable) // 비활성화
+                .httpBasic(AbstractHttpConfigurer::disable) // 비활성화
+                // 특정 URL 패턴에 대해서는 인증 처리를 하지 않을 것 +) /connect/** 을 등록해둬서 웹소켓 요청은 토큰 없이, 즉 인증 없이 바로 접근이 가능 함
+                .authorizeHttpRequests(a -> a.requestMatchers("/member/create", "/member/login", "/connect/**").permitAll().anyRequest().authenticated())
+                // 세션을 사용하지 않을 것
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // 이 필터를 사용하기 전에 jwtAuthFilter를 사용하겠다.
+                // 필터 등록
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        corsConfiguration.setAllowedMethods(Arrays.asList("*"));
-        corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
-        corsConfiguration.setAllowCredentials(true); // 자격 증명을 허용하겠다.
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedMethods(Arrays.asList("*")); //모든 HTTP메서드 허용
+        configuration.setAllowedHeaders(Arrays.asList("*")); //모든 헤더값 허용
+        configuration.setAllowCredentials(true); //자격증명허용
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration); //모든 url에 패턴에 대해 cors 허용 설정
+        source.registerCorsConfiguration("/**", configuration); //모든 url에 패턴에 대해 cors 허용 설정
         return source;
     }
+
     @Bean
     public PasswordEncoder makePassword(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();

@@ -16,9 +16,11 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private final StompHandler stompHandler;
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/connect").setAllowedOrigins("http://localhost:3000")
-                // ws:// 가 아닌 http://를 사용할 수 있게 해주는 sockJS 라이브러리를 통한 요청 허용하는 설정
-                .withSockJS();
+//        registry.addEndpoint("/connect").setAllowedOrigins("http://localhost:3000")
+//                // ws:// 가 아닌 http://를 사용할 수 있게 해주는 sockJS 라이브러리를 통한 요청 허용하는 설정
+//                .withSockJS();
+        registry.addEndpoint("/connect").setAllowedOrigins("*").withSockJS();
+        // front에서는 "ws://localhost:8080:/connect"라고 요청을 보내야 함
     }
 
     @Override

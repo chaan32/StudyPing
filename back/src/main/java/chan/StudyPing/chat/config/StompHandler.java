@@ -56,7 +56,7 @@ public class StompHandler implements ChannelInterceptor {
             // claims에 뭐가 들어 있는 지는 잘 모르겠다
             log.info("토큰 검증 완료!!");
         }
-        /*
+
         if (StompCommand.SUBSCRIBE == accessor.getCommand()){
             log.info("Subscribe 요청 시 토큰 유효성 검증 시작");
             // "Authorization"로 담겨진 토큰 꺼내기
@@ -83,7 +83,7 @@ public class StompHandler implements ChannelInterceptor {
 //                }
 //            }
         }
-*/
+
         return ChannelInterceptor.super.preSend(message, channel);
     }
 }
