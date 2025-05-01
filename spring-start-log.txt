@@ -8,36 +8,36 @@
 
  :: Spring Boot ::                (v3.4.4)
 
-2025-04-30T13:40:44.509Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Starting StudyPingApplication v0.0.1-SNAPSHOT using Java 21 with PID 1 (/app/app.jar started by root in /app)
-2025-04-30T13:40:44.510Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : No active profile set, falling back to 1 default profile: "default"
-2025-04-30T13:40:44.841Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-30T13:40:44.842Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-04-30T13:40:44.918Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 72 ms. Found 7 JPA repository interfaces.
-2025-04-30T13:40:45.049Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-30T13:40:45.049Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-30T13:40:45.062Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.chat.repository.ChatMessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2025-04-30T13:40:45.063Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.chat.repository.ChatParticipantRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2025-04-30T13:40:45.063Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.chat.repository.ChatRoomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2025-04-30T13:40:45.063Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.chat.repository.ReadStatusRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2025-04-30T13:40:45.063Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.member.repository.MemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2025-04-30T13:40:45.063Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.study.repository.StudyMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2025-04-30T13:40:45.063Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.study.repository.StudyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2025-04-30T13:40:45.063Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
-2025-04-30T13:40:45.413Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-04-30T13:40:45.423Z  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-04-30T13:40:45.423Z  INFO 1 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
-2025-04-30T13:40:45.443Z  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-04-30T13:40:45.444Z  INFO 1 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 901 ms
-2025-04-30T13:40:45.549Z  INFO 1 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-04-30T13:40:45.585Z  INFO 1 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
-2025-04-30T13:40:45.602Z  INFO 1 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-04-30T13:40:45.757Z  INFO 1 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-04-30T13:40:45.772Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-04-30T13:40:45.875Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@e4b54d3
-2025-04-30T13:40:45.877Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-04-30T13:40:45.898Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-04-30T13:40:45.898Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-04-30T13:40:45.906Z  INFO 1 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2025-05-01T03:49:57.620Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Starting StudyPingApplication v0.0.1-SNAPSHOT using Java 21 with PID 1 (/app/app.jar started by root in /app)
+2025-05-01T03:49:57.621Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : No active profile set, falling back to 1 default profile: "default"
+2025-05-01T03:49:57.963Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-01T03:49:57.963Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-01T03:49:58.045Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77 ms. Found 7 JPA repository interfaces.
+2025-05-01T03:49:58.176Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-05-01T03:49:58.176Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-05-01T03:49:58.191Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.chat.repository.ChatMessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-01T03:49:58.191Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.chat.repository.ChatParticipantRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-01T03:49:58.191Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.chat.repository.ChatRoomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-01T03:49:58.191Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.chat.repository.ReadStatusRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-01T03:49:58.192Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.member.repository.MemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-01T03:49:58.192Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.study.repository.StudyMemberRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-01T03:49:58.192Z  INFO 1 --- [           main] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface chan.StudyPing.study.repository.StudyRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-05-01T03:49:58.192Z  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+2025-05-01T03:49:58.552Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-05-01T03:49:58.562Z  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-05-01T03:49:58.562Z  INFO 1 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2025-05-01T03:49:58.580Z  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-05-01T03:49:58.581Z  INFO 1 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 923 ms
+2025-05-01T03:49:58.680Z  INFO 1 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-01T03:49:58.715Z  INFO 1 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2025-05-01T03:49:58.735Z  INFO 1 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-01T03:49:58.891Z  INFO 1 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-01T03:49:58.906Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-01T03:49:59.026Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@cf984d9
+2025-05-01T03:49:59.027Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-01T03:49:59.053Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-01T03:49:59.054Z  WARN 1 --- [           main] org.hibernate.orm.deprecation            : HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-05-01T03:49:59.064Z  INFO 1 --- [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0
@@ -45,7 +45,7 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-04-30T13:40:46.438Z  INFO 1 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-01T03:49:59.586Z  INFO 1 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 Hibernate: alter table chat_message drop foreign key FKj52yap2xrm9u0721dct0tjor9
 Hibernate: alter table chat_message drop foreign key FKynfbnbqot8mpd1tquoc2s1w5
 Hibernate: alter table chat_participant drop foreign key FKqaqt420qk0puto2opt6st1u42
@@ -83,85 +83,65 @@ Hibernate: alter table read_status add constraint FK5vcgyvaoi9mh5afb4eyyfi4xr fo
 Hibernate: alter table study add constraint FKrsrgrsgg71mtxivnnp7ec11p1 foreign key (maker_id) references member (id)
 Hibernate: alter table study_member add constraint FKf2jvkah9v99o0ujl7ilpshptk foreign key (member_id) references member (id)
 Hibernate: alter table study_member add constraint FKxu4jds4ab0mfyrvdxsu60iut foreign key (study_id) references study (id)
-2025-04-30T13:40:46.861Z  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-04-30T13:40:47.071Z  INFO 1 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-04-30T13:40:47.658Z  WARN 1 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-04-30T13:40:47.716Z  WARN 1 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+2025-05-01T03:50:00.066Z  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-01T03:50:00.280Z  INFO 1 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-05-01T03:50:00.905Z  WARN 1 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-01T03:50:00.959Z  WARN 1 --- [           main] .s.s.UserDetailsServiceAutoConfiguration : 
 
-Using generated security password: 76d75869-df5d-48ec-8976-9ff164d5f884
+Using generated security password: 50634576-795f-41bc-9516-355d2342cd87
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-04-30T13:40:47.720Z  INFO 1 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-2025-04-30T13:40:47.762Z  INFO 1 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2025-04-30T13:40:47.962Z  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-2025-04-30T13:40:47.963Z  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5ef53e42]]
-2025-04-30T13:40:47.964Z  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-2025-04-30T13:40:47.978Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-04-30T13:40:48.234Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Started StudyPingApplication in 3.991 seconds (process running for 4.301)
-2025-04-30T13:41:47.981Z  INFO 1 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
-2025-04-30T14:11:47.997Z  INFO 1 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 1]
-2025-04-30T14:19:52.806Z  INFO 1 --- [nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-30T14:19:52.807Z  INFO 1 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-04-30T14:19:52.816Z  INFO 1 --- [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
-2025-04-30T14:19:53.016Z  INFO 1 --- [nio-8080-exec-2] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=123@naver.com, password=123)
-2025-04-30T14:19:53.016Z  INFO 1 --- [nio-8080-exec-2] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=123@naver.com, password=123)
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-2025-04-30T14:20:00.439Z  INFO 1 --- [nio-8080-exec-3] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=123@naver.com, password=123)
-2025-04-30T14:20:00.439Z  INFO 1 --- [nio-8080-exec-3] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=123@naver.com, password=123)
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-2025-04-30T14:20:02.319Z  INFO 1 --- [nio-8080-exec-4] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=123@naver.com, password=123)
-2025-04-30T14:20:02.319Z  INFO 1 --- [nio-8080-exec-4] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=123@naver.com, password=123)
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-2025-04-30T14:20:03.699Z  INFO 1 --- [nio-8080-exec-5] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=123@naver.com, password=123)
-2025-04-30T14:20:03.700Z  INFO 1 --- [nio-8080-exec-5] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=123@naver.com, password=123)
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-2025-04-30T14:20:07.678Z  INFO 1 --- [nio-8080-exec-6] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=123@naver.com, password=123)
-2025-04-30T14:20:07.678Z  INFO 1 --- [nio-8080-exec-6] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=123@naver.com, password=123)
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-2025-04-30T14:20:08.530Z  INFO 1 --- [nio-8080-exec-7] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=123@naver.com, password=123)
-2025-04-30T14:20:08.530Z  INFO 1 --- [nio-8080-exec-7] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=123@naver.com, password=123)
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-2025-04-30T14:20:09.600Z  INFO 1 --- [nio-8080-exec-8] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=123@naver.com, password=123)
-2025-04-30T14:20:09.600Z  INFO 1 --- [nio-8080-exec-8] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=123@naver.com, password=123)
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-2025-04-30T14:20:58.266Z  INFO 1 --- [nio-8080-exec-9] c.S.member.controller.MemberController   : 회원가입 요청: MemberSaveReqDto(name=123, email=123@naver.com, password=123)
+2025-05-01T03:50:00.963Z  INFO 1 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-05-01T03:50:01.014Z  INFO 1 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2025-05-01T03:50:01.226Z  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2025-05-01T03:50:01.227Z  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@79add96c]]
+2025-05-01T03:50:01.227Z  INFO 1 --- [           main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2025-05-01T03:50:01.238Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-05-01T03:50:01.507Z  INFO 1 --- [           main] chan.StudyPing.StudyPingApplication      : Started StudyPingApplication in 4.214 seconds (process running for 4.553)
+2025-05-01T03:51:01.233Z  INFO 1 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2025-05-01T03:51:29.400Z  INFO 1 --- [nio-8080-exec-1] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0};] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2025-05-01T03:51:29.405Z  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-05-01T03:51:29.405Z  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-05-01T03:51:29.406Z  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+2025-05-01T03:51:50.386Z  INFO 1 --- [nio-8080-exec-2] c.S.member.controller.MemberController   : 회원가입 요청: MemberSaveReqDto(name=추아메니, email=1@1, password=1)
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
 Hibernate: insert into member (email,name,nickname,password,role) values (?,?,?,?,?)
-2025-04-30T14:21:05.242Z  INFO 1 --- [io-8080-exec-10] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=123@naver.com, password=123)
-2025-04-30T14:21:05.242Z  INFO 1 --- [io-8080-exec-10] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=123@naver.com, password=123)
+2025-05-01T03:51:54.644Z  INFO 1 --- [nio-8080-exec-3] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=1@1, password=1)
+2025-05-01T03:51:54.645Z  INFO 1 --- [nio-8080-exec-3] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=1@1, password=1)
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
-2025-04-30T14:21:25.534Z  INFO 1 --- [nio-8080-exec-1] c.S.study.controller.StudyController     : try to create study : StudyReqDto(title=제목, category=PROGRAMMING, maxParticipants=5, location=ONLINE, description=스터디소개, makerId=1)
+Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
+Hibernate: select cp1_0.id,cp1_0.chat_room_id,cp1_0.created_time,cp1_0.member_id,cp1_0.updated_time from chat_participant cp1_0 where cp1_0.member_id=?
+2025-05-01T03:51:57.881Z  INFO 1 --- [nio-8080-exec-5] c.S.study.controller.StudyController     : try to find all study
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+2025-05-01T03:51:57.901Z  INFO 1 --- [nio-8080-exec-6] c.S.study.controller.StudyController     : try to find all study
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+2025-05-01T03:52:00.075Z  INFO 1 --- [nio-8080-exec-7] c.S.study.controller.StudyController     : controller - selected category : PROGRAMMING
+2025-05-01T03:52:00.076Z  INFO 1 --- [nio-8080-exec-7] c.StudyPing.study.service.StudyService   : service - selected category : PROGRAMMING
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 where s1_0.category=?
+2025-05-01T03:52:00.640Z  INFO 1 --- [nio-8080-exec-8] c.S.study.controller.StudyController     : try to find all study
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+2025-05-01T03:52:43.683Z  INFO 1 --- [io-8080-exec-10] c.S.study.controller.StudyController     : try to create study : StudyReqDto(title=dfasdvuizlfjasdkjjffsfdf, category=LANGUAGE, maxParticipants=5, location=OFFLINE, description=dfsijoszjfoihsdipnkfvljsdhfuicufjisodxjlncguhoivsdlngwhevsiudfkghjshvjdxlifjvk, makerId=1)
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
 Hibernate: insert into study (category,created_time,current_members,description,location,maker_id,max_participants,title,updated_time) values (?,?,?,?,?,?,?,?,?)
 Hibernate: insert into study_member (created_time,member_id,role,study_id,updated_time) values (?,?,?,?,?)
 Hibernate: insert into chat_room (created_time,name,study_id,type,updated_time) values (?,?,?,?,?)
 Hibernate: insert into chat_participant (chat_room_id,created_time,member_id,updated_time) values (?,?,?,?)
+2025-05-01T03:52:44.998Z  INFO 1 --- [nio-8080-exec-1] c.S.study.controller.StudyController     : try to find all study
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select cp1_0.id,cp1_0.chat_room_id,cp1_0.created_time,cp1_0.member_id,cp1_0.updated_time from chat_participant cp1_0 where cp1_0.member_id=?
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.id=?
-2025-04-30T14:25:58.938Z  INFO 1 --- [nio-8080-exec-4] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0};] that contained an invalid cookie. That cookie will be ignored.
- Note: further occurrences of this error will be logged at DEBUG level.
-2025-04-30T14:25:58.951Z  INFO 1 --- [nio-8080-exec-4] c.S.member.controller.MemberController   : 로그인 요청: MemberLoginReqDto(email=123@naver.com, password=123)
-2025-04-30T14:25:58.951Z  INFO 1 --- [nio-8080-exec-4] c.S.member.service.MemberService         : login inputDTO : MemberLoginReqDto(email=123@naver.com, password=123)
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.email=?
+2025-05-01T03:52:45.034Z  INFO 1 --- [nio-8080-exec-2] c.S.study.controller.StudyController     : try to find all study
+Hibernate: select s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0
+Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.study_id=?
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select cp1_0.id,cp1_0.chat_room_id,cp1_0.created_time,cp1_0.member_id,cp1_0.updated_time from chat_participant cp1_0 where cp1_0.member_id=?
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.id=?
-2025-04-30T14:26:06.256Z  INFO 1 --- [nio-8080-exec-6] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+2025-05-01T03:52:46.499Z  INFO 1 --- [nio-8080-exec-3] c.S.study.controller.StudyController     : try to find study by id : 1
 Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
-2025-04-30T14:26:06.282Z  INFO 1 --- [nio-8080-exec-7] c.S.study.controller.StudyController     : try to find Studies which 1 is joined
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join member m1_0 on m1_0.id=sm1_0.member_id where m1_0.id=?
+2025-05-01T03:52:46.525Z  INFO 1 --- [nio-8080-exec-4] c.S.study.controller.StudyController     : try to find study by id : 1
 Hibernate: select s1_0.id,s1_0.category,cr1_0.id,cr1_0.created_time,cr1_0.name,cr1_0.type,cr1_0.updated_time,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time from study s1_0 left join chat_room cr1_0 on s1_0.id=cr1_0.study_id where s1_0.id=?
+Hibernate: select sm1_0.id,sm1_0.created_time,sm1_0.member_id,sm1_0.role,sm1_0.study_id,sm1_0.updated_time from study_member sm1_0 left join study s1_0 on s1_0.id=sm1_0.study_id where s1_0.id=?
 Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select cp1_0.id,cp1_0.chat_room_id,cp1_0.created_time,cp1_0.member_id,cp1_0.updated_time from chat_participant cp1_0 where cp1_0.member_id=?
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select cp1_0.id,cp1_0.chat_room_id,cp1_0.created_time,cp1_0.member_id,cp1_0.updated_time from chat_participant cp1_0 where cp1_0.member_id=?
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.id=?
-Hibernate: select m1_0.id,m1_0.email,m1_0.name,m1_0.nickname,m1_0.password,m1_0.role from member m1_0 where m1_0.id=?
-Hibernate: select cp1_0.id,cp1_0.chat_room_id,cp1_0.created_time,cp1_0.member_id,cp1_0.updated_time from chat_participant cp1_0 where cp1_0.member_id=?
-Hibernate: select cr1_0.id,cr1_0.created_time,cr1_0.name,s1_0.id,s1_0.category,s1_0.created_time,s1_0.current_members,s1_0.description,s1_0.location,s1_0.maker_id,s1_0.max_participants,s1_0.title,s1_0.updated_time,cr1_0.type,cr1_0.updated_time from chat_room cr1_0 left join study s1_0 on s1_0.id=cr1_0.study_id where cr1_0.id=?
