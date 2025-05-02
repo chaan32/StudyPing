@@ -12,16 +12,17 @@ import { Badge } from "@/components/ui/badge"
 import { MapPin, Search, Users } from "lucide-react"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import axios, { AxiosResponse, AxiosError } from 'axios'; // Import axios types
+import { useAuth } from "@/components/auth-provider";
 
-// 스터디 타입 정의
+// 스터디 타입 정의 (백엔드 StudyResDto 기준)
 interface Study {
-  id: number
-  title: string
-  description: string
-  category: string
-  location: string
-  memberCount: number
-  maxMembers: number
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  memberCount: number;
+  maxMembers: number;
+  createdAt?: string; // 필요시 추가
 }
 
 // 카테고리 목록
@@ -36,142 +37,76 @@ export default function StudiesPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState(initialCategory)
 
-  // 스터디 목록 가져오기 (실제로는 API 호출)
   useEffect(() => {
-    // 실제 구현에서는 axios를 사용하여 백엔드에서 데이터를 가져옵니다
-    axios.get('/api/studies', {
-      params: {
-        category: selectedCategory !== '전체' ? selectedCategory : undefined,
-        search: searchTerm || undefined
-      }
+    setLoading(true);
+
+    // API 엔드포인트 결정
+    let apiUrl = '';
+    if (selectedCategory === '전체') {
+      apiUrl = 'http://localhost:8080/study/find/all';
+    } else {
+      let tempC = '';
+      if (selectedCategory === '프로그래밍') tempC = 'PROGRAMMING';
+      else if (selectedCategory === '외국어') tempC = 'LANGUAGE';
+      else if (selectedCategory === '취업 준비') tempC = 'JOB';
+      else if (selectedCategory === '자격증') tempC = 'CERTIFICATION';
+      else if (selectedCategory === '독서') tempC = 'READING';
+      else if (selectedCategory === '기타') tempC = 'ETC';
+      apiUrl = `http://localhost:8080/study/find/category/${tempC}`;
+    }
+
+    const token = localStorage.getItem("accessToken");
+    // 요청 보내기
+    axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${token}` // 헤더에 토큰 포함
+      },
+      withCredentials: true
     })
-      .then((response: AxiosResponse<Study[]>) => {
-        setStudies(response.data);
+      .then((response: AxiosResponse<{ studies: Study[]; message: string }>) => {
+        setStudies(response.data.studies || []);
         setLoading(false);
       })
       .catch((error: AxiosError) => {
-        console.error('스터디 목록을 불러오는데 실패했습니다:', error);
+        console.error("스터디 목록을 불러오는데 실패했습니다:", error);
         setLoading(false);
       });
-
-    // 백엔드 연결 전 더미 데이터
-    // setLoading(true)
-    // setTimeout(() => {
-    //   const dummyStudies = [
-    //     {
-    //       id: 1,
-    //       title: "알고리즘 마스터하기",
-    //       description: "코딩 테스트 대비 알고리즘 스터디입니다. 매주 문제를 풀고 함께 리뷰합니다.",
-    //       category: "프로그래밍",
-    //       location: "온라인",
-    //       memberCount: 8,
-    //       maxMembers: 10,
-    //     },
-    //     {
-    //       id: 2,
-    //       title: "토익 900점 도전",
-    //       description: "토익 900점 이상을 목표로 하는 스터디입니다. 매일 단어 테스트와 주 2회 모의고사를 진행합니다.",
-    //       category: "외국어",
-    //       location: "오프라인",
-    //       memberCount: 5,
-    //       maxMembers: 8,
-    //     },
-    //     {
-    //       id: 3,
-    //       title: "정보처리기사 스터디",
-    //       description: "정보처리기사 자격증 취득을 위한 스터디입니다. 이론 공부와 기출문제 풀이를 함께합니다.",
-    //       category: "자격증",
-    //       location: "온/오프라인 혼합",
-    //       memberCount: 12,
-    //       maxMembers: 15,
-    //     },
-    //     {
-    //       id: 4,
-    //       title: "프론트엔드 개발자 모임",
-    //       description: "React, Vue 등 프론트엔드 기술을 공부하는 모임입니다. 실제 프로젝트를 함께 진행합니다.",
-    //       category: "프로그래밍",
-    //       location: "온라인",
-    //       memberCount: 6,
-    //       maxMembers: 8,
-    //     },
-    //     {
-    //       id: 5,
-    //       title: "영어 회화 스터디",
-    //       description: "원어민과 함께하는 영어 회화 스터디입니다. 주 2회 오프라인 모임을 진행합니다.",
-    //       category: "외국어",
-    //       location: "오프라인",
-    //       memberCount: 4,
-    //       maxMembers: 6,
-    //     },
-    //     {
-    //       id: 6,
-    //       title: "독서 토론 모임",
-    //       description: "매주 한 권의 책을 읽고 토론하는 모임입니다. 다양한 장르의 책을 함께 읽어요.",
-    //       category: "독서",
-    //       location: "온라인",
-    //       memberCount: 7,
-    //       maxMembers: 10,
-    //     },
-    //     {
-    //       id: 7,
-    //       title: "취업 준비 스터디",
-    //       description: "IT 기업 취업을 위한 스터디입니다. 면접 준비와 포트폴리오 리뷰를 함께합니다.",
-    //       category: "취업 준비",
-    //       location: "온/오프라인 혼합",
-    //       memberCount: 8,
-    //       maxMembers: 12,
-    //     },
-    //     {
-    //       id: 8,
-    //       title: "파이썬 기초 스터디",
-    //       description: "파이썬 기초부터 차근차근 배우는 스터디입니다. 초보자 환영합니다.",
-    //       category: "프로그래밍",
-    //       location: "온라인",
-    //       memberCount: 10,
-    //       maxMembers: 15,
-    //     },
-    //     {
-    //       id: 9,
-    //       title: "일본어 JLPT N2 준비",
-    //       description: "JLPT N2 시험 준비를 위한 스터디입니다. 문법과 독해를 중점적으로 공부합니다.",
-    //       category: "외국어",
-    //       location: "온라인",
-    //       memberCount: 6,
-    //       maxMembers: 10,
-    //     },
-    //   ]
-
-    //   // 필터링 적용
-    //   let filteredStudies = dummyStudies
-
-    //   // 카테고리 필터링
-    //   if (selectedCategory !== "전체") {
-    //     filteredStudies = filteredStudies.filter((study) => study.category === selectedCategory)
-    //   }
-
-    //   // 검색어 필터링
-    //   if (searchTerm) {
-    //     filteredStudies = filteredStudies.filter(
-    //       (study) =>
-    //         study.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //         study.description.toLowerCase().includes(searchTerm.toLowerCase()),
-    //     )
-    //   }
-
-    //   setStudies(filteredStudies)
-    //   setLoading(false)
-    // }, 500)
   }, [selectedCategory, searchTerm])
 
-  // 검색 핸들러
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     // 검색 로직은 useEffect에서 처리됨
   }
 
-  // 카테고리 필터 핸들러
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category)
+  }
+
+  const StudyCard = ({ study }: { study: Study }) => {
+    return (
+      <Card className="hover:shadow-lg transition-shadow">
+        <CardHeader>
+          <div className="flex justify-between items-start">
+            <CardTitle className="text-lg font-semibold mb-1">{study.title}</CardTitle>
+            <Badge variant="secondary">{study.category}</Badge>
+          </div>
+          <CardDescription className="text-sm text-gray-600 h-10 overflow-hidden text-ellipsis">
+            {study.description}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="text-xs text-gray-500 flex justify-between items-center">
+            <span>멤버: {study.memberCount} / {study.maxMembers}</span>
+            {study.createdAt && <span>개설: {new Date(study.createdAt).toLocaleDateString()}</span>}
+          </div>
+        </CardContent>
+        <CardFooter>
+          <Button variant="ghost" size="sm">
+            자세히 보기
+          </Button>
+        </CardFooter>
+      </Card>
+    )
   }
 
   return (
@@ -235,34 +170,7 @@ export default function StudiesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {studies.map((study) => (
             <Link href={`/studies/${study.id}`} key={study.id}>
-              <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <CardTitle className="text-xl">{study.title}</CardTitle>
-                    <Badge variant="outline">{study.category}</Badge>
-                  </div>
-                  <CardDescription className="line-clamp-2 mt-2">{study.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-gray-500" />
-                      <span>{study.location}</span>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter className="flex justify-between">
-                  <div className="flex items-center gap-1">
-                    <Users className="h-4 w-4 text-gray-500" />
-                    <span className="text-sm text-gray-500">
-                      {study.memberCount}/{study.maxMembers}
-                    </span>
-                  </div>
-                  <Button variant="ghost" size="sm">
-                    자세히 보기
-                  </Button>
-                </CardFooter>
-              </Card>
+              <StudyCard study={study} />
             </Link>
           ))}
         </div>

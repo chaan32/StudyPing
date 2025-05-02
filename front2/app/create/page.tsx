@@ -14,13 +14,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "@/components/ui/use-toast"
 
 // 카테고리 목록
-const categories = ["프로그래밍", "외국어", "취업 준비", "자격증", "독서", "기타"]
+const categories = [
+  { value: "PROGRAMMING", label: "프로그래밍" },
+  { value: "LANGUAGE", label: "외국어" },
+  { value: "JOB", label: "취업 준비" },
+  { value: "CERTIFICATION", label: "자격증" },
+  { value: "READING", label: "독서" },
+  { value: "ETC", label: "기타" }
+]
 
 // 장소 타입 정의 추가
 const locationTypes = [
-  { value: "온라인", label: "온라인" },
-  { value: "오프라인", label: "오프라인" },
-  { value: "온/오프라인 혼합", label: "온/오프라인 혼합" },
+  { value: "ONLINE", label: "온라인" },
+  { value: "OFFLINE", label: "오프라인" },
+  { value: "BOTH", label: "온/오프라인 혼합" },
 ]
 
 interface Study {
@@ -29,18 +36,21 @@ interface Study {
   description: string;
   category: string;
   location: string;
-  maxMembers: number;
+  maxParticipants: number;
+  makerId : number;
 }
 
 export default function CreateStudyPage() {
   const router = useRouter()
+  const token = localStorage.getItem("accessToken");
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     category: "",
     location: "",
-    maxMembers: 10,
+    maxParticipants: 10,
+    makerId : Number(localStorage.getItem("userId"))
   })
 
   // 입력 필드 변경 핸들러
@@ -72,7 +82,13 @@ export default function CreateStudyPage() {
 
     try {
       // 실제 구현에서는 axios를 사용하여 백엔드로 데이터를 전송합니다
-      const response: AxiosResponse<Study> = await axios.post('/api/studies', formData);
+      axios.post('http://localhost:8080/study/create', formData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true
+      })
+
 
       toast({
         title: "스터디 생성 완료",
@@ -150,8 +166,8 @@ export default function CreateStudyPage() {
                 </SelectTrigger>
                 <SelectContent>
                   {categories.map((category) => (
-                    <SelectItem key={category} value={category}>
-                      {category}
+                    <SelectItem key={category.value} value={category.value}>
+                      {category.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -182,7 +198,7 @@ export default function CreateStudyPage() {
                 type="number"
                 min={2}
                 max={50}
-                value={formData.maxMembers}
+                value={formData.maxParticipants}
                 onChange={handleChange}
                 required
               />

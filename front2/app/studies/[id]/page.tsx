@@ -1,51 +1,69 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, use } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { MapPin, Share2, MessageCircle } from "lucide-react"
 import { toast } from "@/components/ui/use-toast"
 import ChatComponent from "@/components/chat"
 import { useAuth } from "@/components/auth-provider"
 import axios, { AxiosResponse, AxiosError } from "axios"; // Import axios types
 
-// 스터디 타입 정의
+// 스터디 타입 정의 (백엔드 DTO 기준)
 interface Study {
-  id: number
-  title: string
-  description: string
-  category: string
-  location: string
-  memberCount: number
-  maxMembers: number
-  members: Member[]
-  isJoined: boolean
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  // memberCount: number;
+  // maxMembers: number;
+  currentParticipants: number; // 필드명 수정
+  maxParticipants: number; // 필드명 수정
+  members: Member[];
+  createdAt?: string; // 생성일 추가 (백엔드에서 제공한다면)
 }
 
-// 멤버 타입 정의
+// 멤버 타입 정의 (백엔드 DTO 기준)
 interface Member {
-  id: number
-  name: string
-  role: string
-  avatar: string
+  id: number;
+  name: string;
 }
 
-export default function StudyDetailPage({ params }: { params: { id: string } }) {
-  const router = useRouter()
-  const { user } = useAuth()
-  const [study, setStudy] = useState<Study | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [joining, setJoining] = useState(false)
+export default function StudyDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const router = useRouter();
+  const actualParams = use(params); // use 훅으로 params 언래핑
+  const studyId = actualParams.id; // 언래핑된 객체에서 id 추출
 
-  // 스터디 정보 가져오기 (실제로는 API 호출)
+  const { user } = useAuth();
+  const [study, setStudy] = useState<Study | null>(null);
+  const [isJoined, setIsJoined] = useState(false); // 참여 상태 관리
+  const [loading, setLoading] = useState(true);
+  const [joining, setJoining] = useState(false);
+
+  // 스터디 정보 가져오기
   useEffect(() => {
-    axios.get(`/api/studies/${params.id}`)
-      .then((response: AxiosResponse<Study>) => {
-        setStudy(response.data);
+    const token = localStorage.getItem("accessToken");
+    axios.get(`http://localhost:8080/study/find/id/${studyId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      withCredentials: true
+    }) // API 엔드포인트 수정
+      .then((response: AxiosResponse<{ study: Study; message: string }>) => { // 응답 구조 반영
+        const fetchedStudy = response.data.study;
+        setStudy(fetchedStudy);
+
+        // 참여 여부 확인 (로그인 상태이고 멤버 목록에 포함되어 있는지)
+        if (localStorage.getItem("isLoggedIn") === "true") {
+          setIsJoined(true);
+        } else {
+          setIsJoined(false);
+        }
+
         setLoading(false);
       })
       .catch((error: unknown) => {
@@ -58,7 +76,7 @@ export default function StudyDetailPage({ params }: { params: { id: string } }) 
         setLoading(false);
         router.push('/studies');
       });
-  }, [params.id, router])
+  }, [studyId, user, router]) // 의존성 배열에 studyId 와 user 추가 (user는 참여여부 확인에 사용)
 
   // 스터디 참여 핸들러
   const handleJoin = async () => {
@@ -74,16 +92,37 @@ export default function StudyDetailPage({ params }: { params: { id: string } }) 
       return
     }
 
+    // localStorage는 클라이언트 측에서만 접근 가능하므로 핸들러 함수 내부에서 호출
+    const token = localStorage.getItem("accessToken");
+    if (!token) { // 토큰 존재 여부도 확인하는 것이 좋음
+      toast({
+        title: "인증 오류",
+        description: "로그인 정보가 유효하지 않습니다. 다시 로그인해주세요.",
+        variant: "destructive",
+      });
+      // 필요한 경우 로그인 페이지로 리디렉션
+      // router.push('/login');
+      return;
+    }
+
     setJoining(true)
     try {
-      await axios.post(`/api/studies/${study.id}/join`);
+      // API 엔드포인트 및 파라미터 수정
+      await axios
+      .post(`http://localhost:8080/study/join/${user.id}/${studyId}`,null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
 
-      // 상태 업데이트
-      setStudy({
-        ...study,
-        isJoined: true,
-        memberCount: study.memberCount + 1,
-      })
+      // 참여 상태 및 멤버 수 즉시 반영 (Refetch 대신)
+      setIsJoined(true);
+      setStudy(prevStudy => prevStudy ? {
+        ...prevStudy,
+        currentParticipants: prevStudy.currentParticipants + 1,
+      } : null);
 
       toast({
         title: "스터디 참여 완료",
@@ -93,9 +132,9 @@ export default function StudyDetailPage({ params }: { params: { id: string } }) 
       console.error("스터디 참여 중 오류 발생:", error)
       let errorMessage = "스터디 참여 중 오류가 발생했습니다.";
       if (axios.isAxiosError(error)) {
-         errorMessage = error.response?.data?.message || error.message || errorMessage;
+        errorMessage = error.response?.data?.message || error.message || errorMessage;
       } else if (error instanceof Error) {
-         errorMessage = error.message;
+        errorMessage = error.message;
       }
       toast({
         title: "오류 발생",
@@ -148,6 +187,12 @@ export default function StudyDetailPage({ params }: { params: { id: string } }) 
     )
   }
 
+  console.log('Rendering buttons check:', {
+    isJoined,
+    currentParticipants: study?.currentParticipants,
+    maxParticipants: study?.maxParticipants,
+  });
+
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex justify-between items-start mb-6">
@@ -156,7 +201,7 @@ export default function StudyDetailPage({ params }: { params: { id: string } }) 
           <div className="flex items-center gap-2 mt-2">
             <Badge variant="outline">{study.category}</Badge>
             <span className="text-sm text-gray-500">
-              멤버: {study.memberCount}/{study.maxMembers}
+              멤버: {study.currentParticipants}/{study.maxParticipants}
             </span>
           </div>
         </div>
@@ -164,21 +209,23 @@ export default function StudyDetailPage({ params }: { params: { id: string } }) 
           <Button variant="outline" size="icon" onClick={handleShare}>
             <Share2 className="h-4 w-4" />
           </Button>
-          {!study.isJoined && study.memberCount < study.maxMembers && (
+          {/* 조건부 렌더링 시작 */}
+          {!isJoined && study.currentParticipants < study.maxParticipants && (
             <Button onClick={handleJoin} disabled={joining}>
               {joining ? "참여 중..." : "스터디 참여하기"}
             </Button>
           )}
-          {study.isJoined && (
+          {isJoined && (
             <Button variant="outline" disabled>
               참여 중
             </Button>
           )}
-          {!study.isJoined && study.memberCount >= study.maxMembers && (
+          {!isJoined && study.currentParticipants >= study.maxParticipants && (
             <Button variant="outline" disabled>
               모집 마감
             </Button>
           )}
+          {/* 조건부 렌더링 끝 */}
         </div>
       </div>
 
@@ -186,7 +233,7 @@ export default function StudyDetailPage({ params }: { params: { id: string } }) 
         <TabsList className="mb-6">
           <TabsTrigger value="info">스터디 정보</TabsTrigger>
           <TabsTrigger value="members">멤버 ({study.members.length})</TabsTrigger>
-          {study.isJoined && <TabsTrigger value="chat">채팅</TabsTrigger>}
+          {isJoined && <TabsTrigger value="chat">채팅</TabsTrigger>}
         </TabsList>
 
         <TabsContent value="info">
@@ -202,10 +249,12 @@ export default function StudyDetailPage({ params }: { params: { id: string } }) 
 
                 <div className="grid grid-cols-1 gap-4 pt-4 border-t">
                   <div className="space-y-2">
-                    <div className="text-sm font-medium">스터디 장소</div>
+                    <div className="text-sm font-medium">스터디 정보</div>
                     <div className="flex items-center gap-2">
-                      <MapPin className="h-4 w-4 text-gray-500" />
-                      <span>{study.location}</span>
+                      {study.createdAt && (
+                        <span className="mr-4">개설일: {new Date(study.createdAt).toLocaleDateString()}</span>
+                      )}
+                      <span className="mr-4">멤버: {study.currentParticipants} / {study.maxParticipants}</span>
                     </div>
                   </div>
                 </div>
@@ -219,29 +268,25 @@ export default function StudyDetailPage({ params }: { params: { id: string } }) 
             <CardHeader>
               <CardTitle>스터디 멤버</CardTitle>
               <CardDescription>
-                현재 {study.memberCount}명이 참여 중입니다 (최대 {study.maxMembers}명)
+                현재 {study.currentParticipants}명이 참여 중입니다 (최대 {study.maxParticipants}명)
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {study.members.map((member) => (
-                  <div key={member.id} className="flex items-center gap-4 p-3 rounded-lg hover:bg-muted">
+              <ul className="space-y-2">
+                {study.members?.map((member) => (
+                  <li key={member.id ?? Math.random()} className="flex items-center gap-2">
                     <Avatar>
-                      <AvatarImage src={member.avatar || "/placeholder.svg"} alt={member.name} />
-                      <AvatarFallback>{member.name.slice(0, 2)}</AvatarFallback>
+                      <AvatarFallback>{member.name ? member.name.slice(0, 1).toUpperCase() : '?'}</AvatarFallback>
                     </Avatar>
-                    <div>
-                      <div className="font-medium">{member.name}</div>
-                      <div className="text-sm text-gray-500">{member.role}</div>
-                    </div>
-                  </div>
+                    <span>{member.name ?? 'Unknown Member'}</span> 
+                  </li>
                 ))}
-              </div>
+              </ul>
             </CardContent>
           </Card>
         </TabsContent>
-
-        {study.isJoined && (
+                
+        {isJoined && (
           <TabsContent value="chat" className="h-[600px]">
             <Card className="h-full flex flex-col">
               <CardHeader>

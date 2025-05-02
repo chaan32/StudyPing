@@ -12,16 +12,17 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import ChatComponent from "@/components/chat"
 import axios, { AxiosResponse, AxiosError } from 'axios'; // Import axios types
 
-// 스터디 타입 정의
+// 스터디 타입 정의 (백엔드 API 응답 기준 - StudyResDto 가정)
 interface Study {
   id: number
   title: string
   description: string
   category: string
-  location: string
-  memberCount: number
-  maxMembers: number
-  role: string // 사용자의 역할 (운영자/멤버)
+  currentParticipants: number // 필드 이름 수정 (API 응답 기준)
+  maxParticipants: number // 필드 이름 수정
+  createdAt?: string // 생성 날짜 (선택적)
+  location?: string // 필요 시 추가
+  role?: string // 필요 시 추가
 }
 
 export default function MyStudiesPage() {
@@ -43,60 +44,37 @@ export default function MyStudiesPage() {
 
   // 내 스터디 목록 가져오기 (실제로는 API 호출)
   useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    const userId = localStorage.getItem('userId');
+
     if (!user) return
 
+
     // 실제 구현에서는 axios를 사용하여 백엔드에서 데이터를 가져옵니다
-    axios.get('/api/my-studies')
-      .then((response: AxiosResponse<Study[]>) => {
-        setStudies(response.data);
+    axios.get(`http://localhost:8080/study/find/joined/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}` // 헤더는 인터셉터가 처리할 것으로 가정 (필요 시 주석 해제)
+      },
+      withCredentials: true
+    })
+      .then((response: AxiosResponse<{ studyList: Study[] }>) => {
+        // studyList 키가 없을 경우를 대비하여 확인 후 추출 (백엔드 응답이 배열만 올 수도 있으므로)
+        const studiesData = response.data.studyList || response.data || []; 
+        console.log('API 응답 데이터 (raw):', response.data);
+        console.log('추출된 스터디 데이터:', studiesData);
+        setStudies(studiesData);
         setLoading(false);
       })
       .catch((error: AxiosError) => {
         console.error('스터디 목록을 불러오는데 실패했습니다:', error);
         setLoading(false);
       });
-
-    // 백엔드 연결 전 더미 데이터
-    // setLoading(true)
-    // setTimeout(() => {
-    //   // 참여 중인 스터디
-    //   const participatingStudies = [
-    //     {
-    //       id: 1,
-    //       title: "알고리즘 마스터하기",
-    //       description: "코딩 테스트 대비 알고리즘 스터디입니다. 매주 문제를 풀고 함께 리뷰합니다.",
-    //       category: "프로그래밍",
-    //       location: "온라인",
-    //       memberCount: 8,
-    //       maxMembers: 10,
-    //       role: "멤버",
-    //     },
-    //     {
-    //       id: 3,
-    //       title: "정보처리기사 스터디",
-    //       description: "정보처리기사 자격증 취득을 위한 스터디입니다. 이론 공부와 기출문제 풀이를 함께합니다.",
-    //       category: "자격증",
-    //       location: "온/오프라인 혼합",
-    //       memberCount: 12,
-    //       maxMembers: 15,
-    //       role: "운영자",
-    //     },
-    //     {
-    //       id: 7,
-    //       title: "취업 준비 스터디",
-    //       description: "IT 기업 취업을 위한 스터디입니다. 면접 준비와 포트폴리오 리뷰를 함께합니다.",
-    //       category: "취업 준비",
-    //       location: "온/오프라인 혼합",
-    //       memberCount: 8,
-    //       maxMembers: 12,
-    //       role: "운영자",
-    //     },
-    //   ]
-
-    //   setStudies(participatingStudies)
-    //   setLoading(false)
-    // }, 500)
   }, [user])
+
+  // studies 상태 변화 확인
+  useEffect(() => {
+    console.log('Studies 상태 업데이트됨:', studies);
+  }, [studies]);
 
   // 채팅방 열기 핸들러
   const openChat = (study: Study) => {
@@ -138,14 +116,13 @@ export default function MyStudiesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {studies.map((study) => (
             <Card key={study.id} className="hover:shadow-md transition-shadow h-full">
+              {/* 3. 맵핑 함수 내부 로그 (필요 시) */}
+              {/* {console.log('Rendering study:', study)} */}
               <CardHeader>
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-start mb-2">
                   <CardTitle className="text-xl">{study.title}</CardTitle>
                   <div className="flex flex-col gap-2 items-end">
-                    <Badge variant="outline">{study.category}</Badge>
-                    <Badge variant="outline" className="bg-primary/10">
-                      {study.role}
-                    </Badge>
+                    <Badge variant="secondary">{study.category}</Badge> {/* 스타일 통일 */}
                   </div>
                 </div>
                 <CardDescription className="line-clamp-2 mt-2">{study.description}</CardDescription>
@@ -154,7 +131,7 @@ export default function MyStudiesPage() {
                 <div className="flex items-center gap-1">
                   <Users className="h-4 w-4 text-gray-500" />
                   <span className="text-sm text-gray-500">
-                    {study.memberCount}/{study.maxMembers}
+                    {study.currentParticipants}/{study.maxParticipants} {/* 필드 이름 수정 */}
                   </span>
                 </div>
                 <div className="flex gap-2">
@@ -163,7 +140,7 @@ export default function MyStudiesPage() {
                     채팅
                   </Button>
                   <Button variant="ghost" size="sm" asChild>
-                    <Link href={`/studies/${study.id}`}>자세히 보기</Link>
+                    <Link href={`/studies/${study.id}`} passHref>자세히 보기</Link>
                   </Button>
                 </div>
               </CardFooter>

@@ -15,9 +15,10 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
+
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { user, login, logout } = useAuth()
+  const auth = useAuth()
 
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -36,7 +37,7 @@ export default function Navbar() {
             <Link href="/studies" className="text-gray-700 hover:text-primary">
               스터디 목록
             </Link>
-            {user && (
+            {auth.user && (
               <Link href="/my-studies" className="text-gray-700 hover:text-primary">
                 내 스터디
               </Link>
@@ -45,21 +46,23 @@ export default function Navbar() {
               스터디 생성
             </Link>
 
-            {user ? (
+            {auth.user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                    {/* 사용자 이름이 있으면 첫 글자를 표시, 없으면 기본값('U') 또는 다른 문자 표시 */}
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src={user.avatar || "/placeholder.svg"} alt={user.name} />
-                      <AvatarFallback>{user.name.slice(0, 2)}</AvatarFallback>
+                      {/* <AvatarImage src="/avatars/01.png" alt={auth.user.name || 'User'} /> */}
+                      <AvatarFallback>{auth.user.name ? auth.user.name[0].toUpperCase() : '?'}</AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end" forceMount>
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium leading-none">{user.name}</p>
-                      <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                      <p className="text-sm font-medium leading-none">
+                        {auth.user.name}
+                      </p>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
@@ -69,16 +72,18 @@ export default function Navbar() {
                       <span>내 스터디</span>
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={logout} className="cursor-pointer">
+                  <DropdownMenuItem onClick={auth.logout} className="cursor-pointer">
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>로그아웃</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button variant="default" onClick={login}>
-                로그인
-              </Button>
+              <Link href="/login">
+                <Button variant="default">
+                  로그인
+                </Button>
+              </Link>
             )}
           </div>
 
@@ -107,7 +112,7 @@ export default function Navbar() {
             >
               스터디 목록
             </Link>
-            {user && (
+            {auth.user && (
               <Link
                 href="/my-studies"
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md"
@@ -124,23 +129,24 @@ export default function Navbar() {
               스터디 생성
             </Link>
             <div className="px-4 py-2">
-              {user ? (
+              {auth.user ? (
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src={user.avatar || "/placeholder.svg"} alt={user.name} />
-                      <AvatarFallback>{user.name.slice(0, 2)}</AvatarFallback>
+                      <AvatarFallback>{auth.user.name ? auth.user.name[0].toUpperCase() : '?'}</AvatarFallback>
                     </Avatar>
-                    <span>{user.name}</span>
+                    <span>{auth.user.name}</span>
                   </div>
-                  <Button variant="outline" size="sm" onClick={logout}>
+                  <Button variant="outline" size="sm" onClick={auth.logout}>
                     로그아웃
                   </Button>
                 </div>
               ) : (
-                <Button className="w-full" onClick={login}>
-                  로그인
-                </Button>
+                <Link href="/login">
+                  <Button className="w-full">
+                    로그인
+                  </Button>
+                </Link>
               )}
             </div>
           </div>

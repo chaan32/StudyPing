@@ -10,7 +10,11 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8080/:path*', // 백엔드 서버 주소
+        destination: 'http://localhost:8080/:path*', // Proxy API requests
+      },
+      {
+        source: '/ws/:path*', // Add this rule for WebSocket
+        destination: 'http://localhost:8080/connect/:path*', // Proxy WebSocket requests
       },
     ];
   },

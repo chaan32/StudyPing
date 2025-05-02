@@ -1,71 +1,78 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 
-// 사용자 타입 정의
+// 사용자 타입 정의 (localStorage에서 가져올 정보 기준)
 export interface User {
-  id: number
-  name: string
-  email: string
-  avatar: string
+  id: string | number;
+  name: string;       
 }
 
 // 인증 컨텍스트 타입 정의
 interface AuthContextType {
-  user: User | null
-  isLoading: boolean
-  login: () => void
-  logout: () => void
+  user: User | null;
+  isLoading: boolean;
+  login: (userId: string, userName: string) => void;
+  logout: () => void;
 }
 
 // 인증 컨텍스트 생성
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
-
-// 더미 사용자 데이터
-const dummyUser: User = {
-  id: 1,
-  name: "사용자",
-  email: "user@example.com",
-  avatar: "/placeholder.svg?height=32&width=32",
-}
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // 인증 제공자 컴포넌트
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // 초기 로그인 상태 확인 (실제로는 토큰 검증 등을 수행)
+  // 초기 로그인 상태 확인 (localStorage 기반)
   useEffect(() => {
-    // 로컬 스토리지에서 로그인 상태 확인
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true"
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const userId = localStorage.getItem("userId");
+    const userName = localStorage.getItem("name"); 
 
-    if (loggedIn) {
-      setUser(dummyUser)
+    if (loggedIn && userId && userName) {
+      setUser({ id: userId, name: userName });
+    } else {
+      handleLogout(); 
     }
+    setIsLoading(false);
+  }, []);
 
-    setIsLoading(false)
-  }, [])
+  // 로그아웃 처리 함수
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("isLoggedIn"); 
+    localStorage.removeItem("name"); 
+    setUser(null);
+  };
 
-  // 로그인 함수
-  const login = () => {
-    setUser(dummyUser)
-    localStorage.setItem("isLoggedIn", "true")
-  }
+  // 로그인 함수 정의
+  const login = (newUserId: string, newUserName: string) => {
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('userId', newUserId);
+    localStorage.setItem('name', newUserName); 
+    setUser({ id: newUserId, name: newUserName });
+    console.log('AuthProvider: User logged in', newUserId, newUserName);
+  };
 
-  // 로그아웃 함수
+  // logout 함수를 context value로 제공 (handleLogout 호출)
   const logout = () => {
-    setUser(null)
-    localStorage.setItem("isLoggedIn", "false")
-  }
+    handleLogout();
+  };
 
-  return <AuthContext.Provider value={{ user, isLoading, login, logout }}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ user, isLoading, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
-// 인증 컨텍스트 사용을 위한 훅
+// 인증 컨텍스트 사용 훅
 export function useAuth() {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider")
+    throw new Error("useAuth must be used within an AuthProvider");
   }
-  return context
+  return context;
 }
