@@ -37,13 +37,17 @@ export default function StudiesPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState(initialCategory)
 
+
   useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+
+
     setLoading(true);
 
-    // API 엔드포인트 결정
+    // API 엔드포인트 결정 (Use direct backend URL)
     let apiUrl = '';
     if (selectedCategory === '전체') {
-      apiUrl = 'http://localhost:8080/study/find/all';
+      apiUrl = 'http://localhost:8080/study/find/all'; // Use direct backend URL
     } else {
       let tempC = '';
       if (selectedCategory === '프로그래밍') tempC = 'PROGRAMMING';
@@ -52,16 +56,18 @@ export default function StudiesPage() {
       else if (selectedCategory === '자격증') tempC = 'CERTIFICATION';
       else if (selectedCategory === '독서') tempC = 'READING';
       else if (selectedCategory === '기타') tempC = 'ETC';
-      apiUrl = `http://localhost:8080/study/find/category/${tempC}`;
+      apiUrl = `http://localhost:8080/study/find/category/${tempC}`; // Use direct backend URL
     }
 
-    const token = localStorage.getItem("accessToken");
+    console.log("Fetching studies from:", apiUrl);
+    console.log("Using token for studies API:", token); // Log the token being used
+
     // 요청 보내기
     axios.get(apiUrl, {
       headers: {
-        Authorization: `Bearer ${token}` // 헤더에 토큰 포함
+        Authorization: `Bearer ${token}` // Use token from useAuth
       },
-      withCredentials: true
+      // Remove withCredentials: true
     })
       .then((response: AxiosResponse<{ studies: Study[]; message: string }>) => {
         setStudies(response.data.studies || []);
@@ -69,9 +75,13 @@ export default function StudiesPage() {
       })
       .catch((error: AxiosError) => {
         console.error("스터디 목록을 불러오는데 실패했습니다:", error);
+        // Log the specific error response if available
+        if (error.response) {
+            console.error("Error details:", error.response.data);
+        }
         setLoading(false);
       });
-  }, [selectedCategory, searchTerm])
+  }, [selectedCategory, searchTerm]); // Add token and isLoading to dependencies
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
@@ -90,24 +100,24 @@ export default function StudiesPage() {
             <CardTitle className="text-lg font-semibold mb-1">{study.title}</CardTitle>
             <Badge variant="secondary">{study.category}</Badge>
           </div>
-          <CardDescription className="text-sm text-gray-600 h-10 overflow-hidden text-ellipsis">
-            {study.description}
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-xs text-gray-500 flex justify-between items-center">
-            <span>멤버: {study.memberCount} / {study.maxMembers}</span>
-            {study.createdAt && <span>개설: {new Date(study.createdAt).toLocaleDateString()}</span>}
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button variant="ghost" size="sm">
-            자세히 보기
-          </Button>
-        </CardFooter>
-      </Card>
-    )
-  }
+        <CardDescription className="text-sm text-gray-600 h-10 overflow-hidden text-ellipsis">
+          {study.description}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="text-xs text-gray-500 flex justify-between items-center">
+          <span>멤버: {study.memberCount} / {study.maxMembers}</span>
+          {study.createdAt && <span>개설: {new Date(study.createdAt).toLocaleDateString()}</span>}
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button variant="ghost" size="sm">
+          자세히 보기
+        </Button>
+      </CardFooter>
+    </Card>
+  )
+}
 
   return (
     <div className="space-y-8">

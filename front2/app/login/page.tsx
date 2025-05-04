@@ -48,7 +48,7 @@ export default function LoginPage() {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('name', userName);
 
-        login(userId, userName); 
+        login(userId, userName, token); 
 
         router.push('/'); 
 

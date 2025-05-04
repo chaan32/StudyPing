@@ -24,14 +24,15 @@ public class StompController {
     @MessageMapping("/{roomId}")
     public void sendMessage(@DestinationVariable Long roomId, ChatMessageDto chatMessageDto) throws JsonProcessingException {
 
-        log.info("📨 메시지 수신 - roomId: {}, sender: {}, message: {}",
-                roomId, chatMessageDto.getSenderId(), chatMessageDto.getMessage());
+        log.info("📨 메시지 수신 - roomId: {}, senderId: {} senderName: {}, message: {}",
+                roomId, chatMessageDto.getSenderId(), chatMessageDto.getSenderName(), chatMessageDto.getContent());
 
         chatMessageDto.setRoomId(roomId);  // ChatMessageDto : roomId ❌ -> DestinationVar 에서 받아서 넣어 줘야 함
 
         chatService.saveMessage(roomId, chatMessageDto); // DB에 저장
 
         ObjectMapper mapper = new ObjectMapper();
+
         String message = mapper.writeValueAsString(chatMessageDto);
         redisPubSubService.publish("chat", message); //Redis 채널의 이름에 메세지를 전달 해주는 것
     }

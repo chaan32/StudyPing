@@ -44,7 +44,7 @@ public class ChatService {
         ChatMessage newChatMsg = ChatMessage.builder()
                 .chatRoom(chatRoom)
                 .member(sender)
-                .content(dto.getMessage())
+                .content(dto.getContent())
                 .build();
 
         // 4. 저장
@@ -172,7 +172,8 @@ public class ChatService {
         List<ChatMessageDto> dtos = new ArrayList<>();
         for (ChatMessage message : messages) {
             ChatMessageDto dto = ChatMessageDto.builder()
-                    .message(message.getContent())
+                    .content(message.getContent())
+                    .senderId(message.getMember().getId())
                     .senderEmail(message.getMember().getEmail())
                     .senderName(message.getMember().getName())
                     .build();
@@ -195,11 +196,5 @@ public class ChatService {
             r.updateReadStatus(true);
         }
     }
-
-
-    private String getEmailFromAuth(){
-        return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
-
+    private String getEmailFromAuth(){return SecurityContextHolder.getContext().getAuthentication().getName();}
 }
-
