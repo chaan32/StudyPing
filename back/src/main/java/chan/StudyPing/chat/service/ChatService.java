@@ -176,6 +176,7 @@ public class ChatService {
                     .senderId(message.getMember().getId())
                     .senderEmail(message.getMember().getEmail())
                     .senderName(message.getMember().getName())
+                    .timestamp(message.getCreatedTime())
                     .build();
             dtos.add(dto);
         }
