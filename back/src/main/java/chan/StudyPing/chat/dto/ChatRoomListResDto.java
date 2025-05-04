@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ChatRoomListResDto {
     private Long roomId;
-    private String roomName;
-    private ChatRoomType roomType;
+    private String title;
+    private Long unReadCount;
 }

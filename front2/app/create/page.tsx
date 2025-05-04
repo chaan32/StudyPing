@@ -48,14 +48,18 @@ export default function CreateStudyPage() {
     description: "",
     category: "",
     location: "",
-    maxParticipants: 10,
+    maxParticipants: 2, // Default to 2
     makerId : Number(localStorage.getItem("userId"))
   })
 
   // 입력 필드 변경 핸들러
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    // Handle number input specifically
+    setFormData((prev) => ({
+      ...prev,
+      [name]: e.target.type === 'number' ? parseInt(value, 10) || 0 : value,
+    }));
   }
 
   // 셀렉트 변경 핸들러
@@ -88,11 +92,11 @@ export default function CreateStudyPage() {
         makerId: Number(userId) // Ensure makerId uses the latest userId
     };
 
-    // 유효성 검사
-    if (!updatedFormData.title || !updatedFormData.description || !updatedFormData.category || !updatedFormData.location) {
+    // 유효성 검사 (maxParticipants 추가)
+    if (!updatedFormData.title || !updatedFormData.description || !updatedFormData.category || !updatedFormData.location || !updatedFormData.maxParticipants || updatedFormData.maxParticipants < 2) {
       toast({
         title: "입력 오류",
-        description: "모든 필수 항목을 입력해주세요.",
+        description: "모든 필수 항목을 올바르게 입력해주세요. (최소 인원 2명)",
         variant: "destructive",
       })
       return
@@ -215,13 +219,13 @@ export default function CreateStudyPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="maxMembers">최대 인원 *</Label>
+              <Label htmlFor="maxParticipants">최대 인원 * (최소 2명)</Label>
               <Input
-                id="maxMembers"
-                name="maxMembers"
+                id="maxParticipants"
+                name="maxParticipants"
                 type="number"
-                min={2}
-                max={50}
+                min="2"
+                placeholder="스터디 최대 인원 수를 입력하세요"
                 value={formData.maxParticipants}
                 onChange={handleChange}
                 required
