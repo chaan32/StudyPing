@@ -11,6 +11,8 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -42,19 +44,34 @@ public class StompHandler implements ChannelInterceptor {
 
             log.info("Connect 요청 시 토큰 유효성 검증 시작");
 
-            // "Authorization"로 담겨진 토큰 꺼내고 "Bearer " 앞 부분 제거
-            String bearerToken = accessor.getFirstNativeHeader("Authorization");
-            String token = bearerToken.substring(7);
+            try {
+                // "Authorization"로 담겨진 토큰 꺼내기
+                String bearerToken = accessor.getFirstNativeHeader("Authorization");
 
-            // 토큰 검증
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(secretKey)
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
+                // 토큰 존재 및 형식 검증
+                if (bearerToken == null || !bearerToken.startsWith("Bearer ")) {
+                    log.warn("CONNECT 요청에 유효한 Authorization 헤더가 없습니다.");
+                    throw new AccessDeniedException("유효한 토큰이 필요합니다.");
+                }
 
-            // claims에 뭐가 들어 있는 지는 잘 모르겠다
-            log.info("토큰 검증 완료!!");
+                // "Bearer " 앞 부분 제거
+                String token = bearerToken.substring(7);
+
+                // 토큰 검증
+                Claims claims = Jwts.parserBuilder()
+                        .setSigningKey(secretKey)
+                        .build()
+                        .parseClaimsJws(token) // 여기서 유효하지 않으면 예외 발생
+                        .getBody();
+
+                // claims에 뭐가 들어 있는 지는 잘 모르겠다 (필요시 사용자 정보 저장 로직 추가)
+                log.info("토큰 검증 완료!! 사용자: {}", claims.getSubject());
+
+            } catch (Exception e) { // JWT 파싱/검증 오류 및 기타 예외 처리
+                log.error("CONNECT 중 토큰 검증 실패: {}", e.getMessage());
+                // AuthenticationException 또는 AccessDeniedException을 던져 연결 거부
+                throw new AccessDeniedException("토큰 검증 실패: " + e.getMessage(), e);
+            }
         }
         /*
         if (StompCommand.SUBSCRIBE == accessor.getCommand()){

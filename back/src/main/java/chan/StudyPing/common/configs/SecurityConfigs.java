@@ -17,6 +17,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration // Spring의 설정 클래스를 나타내는 어노테이션
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class SecurityConfigs {
                 .httpBasic(AbstractHttpConfigurer::disable) // HTTP Basic 비활성화 하기 - 토큰 기반의 인증을 할 것이기 떄문에 이거 필ㅇ 없음
                 // 인증처리 제외 URL 패턴
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/test", "/member/login", "/member/create").permitAll()
+                        .requestMatchers("/test", "/member/login", "/member/create","/connect/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -42,14 +43,14 @@ public class SecurityConfigs {
     }
     @Bean
     CorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        corsConfiguration.setAllowedMethods(Arrays.asList("*"));
-        corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
-        corsConfiguration.setAllowCredentials(true); // 자격 증명을 허용하겠다.
-
+        CorsConfiguration configuration = new CorsConfiguration();
+        // "*" ??? ???? ???? ?? ??
+        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*")); // ?? ?? ??? ??
+        configuration.setAllowCredentials(true); // ?? ?? ?? ??
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration); //모든 url에 패턴에 대해 cors 허용 설정
+        source.registerCorsConfiguration("/**", configuration); //모든 url에 패턴에 대해 cors 허용 설정
         return source;
     }
     @Bean

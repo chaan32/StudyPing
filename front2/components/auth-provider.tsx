@@ -11,8 +11,9 @@ export interface User {
 // 인증 컨텍스트 타입 정의
 interface AuthContextType {
   user: User | null;
+  token: string | null;
   isLoading: boolean;
-  login: (userId: string, userName: string) => void;
+  login: (userId: string, userName: string, token: string) => void;
   logout: () => void;
 }
 
@@ -22,16 +23,19 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 // 인증 제공자 컴포넌트
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // 초기 로그인 상태 확인 (localStorage 기반)
   useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const storedToken = localStorage.getItem("accessToken");
     const userId = localStorage.getItem("userId");
     const userName = localStorage.getItem("name"); 
 
-    if (loggedIn && userId && userName) {
+    if (storedToken && userId && userName) {
       setUser({ id: userId, name: userName });
+      setToken(storedToken);
+      // Optionally verify token validity here before setting user/token
     } else {
       handleLogout(); 
     }
@@ -45,14 +49,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem("isLoggedIn"); 
     localStorage.removeItem("name"); 
     setUser(null);
+    setToken(null);
   };
 
   // 로그인 함수 정의
-  const login = (newUserId: string, newUserName: string) => {
+  const login = (newUserId: string, newUserName: string, newToken: string) => {
+    localStorage.setItem('accessToken', newToken);
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('userId', newUserId);
     localStorage.setItem('name', newUserName); 
     setUser({ id: newUserId, name: newUserName });
+    setToken(newToken);
     console.log('AuthProvider: User logged in', newUserId, newUserName);
   };
 
@@ -62,7 +69,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ user, token, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

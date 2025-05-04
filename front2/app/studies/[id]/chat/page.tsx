@@ -31,7 +31,7 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
   const actualParams = use(params);
   const studyId = Number(actualParams.id);
 
-  const { user } = useAuth();
+  const { user, token, isLoading: isAuthLoading } = useAuth();
   const [study, setStudy] = useState<Study | null>(null); // 스터디 제목 등 표시용
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState("");
@@ -63,24 +63,30 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
 
   // WebSocket 연결 및 메시지 처리
   useEffect(() => {
-    if (!studyId || !user) return; // studyId와 user 정보가 있어야 연결 시도
+    // Wait until we have the user and token
+    if (isAuthLoading) {
+        console.log("Chat: Waiting for AuthProvider to load...");
+        return;
+    }
 
-    const token = localStorage.getItem("accessToken");
-    if (!token) {
-      console.error("인증 토큰 없음");
-      router.push('/login');
+    if (!user || !token || !studyId) {
+      console.log("1️⃣ User Id : ", user?.id);
+      console.log("2️⃣ Token : ", token);
+      console.log("3️⃣ Study Id : ", studyId);
+      // Optional: Redirect or show error if authentication is required but missing
       return;
     }
 
-    // SockJS 인스턴스 생성
+    console.log("Chat: Auth loaded, User and Token found, attempting connection with token:", token); // Log the token
+
     const socketFactory = () => new SockJS(`http://localhost:8080/connect`); // 백엔드 WebSocket 엔드포인트 (/connect)
 
     const client = new Client({
       webSocketFactory: socketFactory,
       connectHeaders: {
-        Authorization: `Bearer ${token}`, // 백엔드 StompHandler에서 처리하는 헤더
+        Authorization: `Bearer ${token}`,
       },
-      reconnectDelay: 5000, // 5초 후 재연결 시도
+      reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
       onConnect: (frame: IFrame) => {
@@ -116,7 +122,7 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
 
     stompClientRef.current = client;
     client.activate();
-    console.log('STOMP 클라이언트 활성화 시도');
+    console.log('STOMP 클라이언트 활성화 시도'); // 1️⃣
 
     // 컴포넌트 언마운트 시 연결 해제
     return () => {
@@ -125,7 +131,7 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
       setIsConnected(false);
       console.log('STOMP 연결 해제됨');
     };
-  }, [studyId, user, router]); // studyId나 user가 변경되면 재연결
+  }, [studyId, user, token, isAuthLoading]); // studyId나 user가 변경되면 재연결
 
   // 메시지 전송 핸들러
   const sendMessage = () => {
@@ -178,7 +184,7 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-150px)] max-w-4xl mx-auto p-4">
+    <div className="flex flex-col min-h-screen max-w-4xl mx-auto p-4 bg-red-100">
       <h1 className="text-2xl font-bold mb-4">{study.title} - 채팅</h1>
       <p className="mb-2 text-sm text-gray-600">
         연결 상태: {isConnected ? <span className="text-green-600 font-semibold">연결됨</span> : <span className="text-red-600 font-semibold">연결 끊김</span>}
@@ -204,16 +210,31 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
           </div>
         ))}
       </ScrollArea>
-      <div className="flex gap-2">
+
+      {/* Message Input and Send Button Area - Separated */}
+      <div className="p-2 border-t bg-white flex-shrink-0"> 
         <Input
           type="text"
           placeholder="메시지를 입력하세요..."
           value={newMessage}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewMessage(e.target.value)}
-          onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && sendMessage()}
-          disabled={!isConnected} // 연결 안 됐으면 비활성화
+          onChange={(e) => setNewMessage(e.target.value)}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+              event.preventDefault();
+              sendMessage();
+            }
+          }}
+          className="w-full mb-2" // Full width and margin bottom
+          disabled={!isConnected}
         />
-        <Button onClick={sendMessage} disabled={!isConnected || !newMessage.trim()}>전송</Button>
+        <div className="flex justify-end"> {/* Align button to the right */}
+          <Button 
+            onClick={sendMessage} 
+            disabled={!isConnected || newMessage.trim().length === 0}
+          >
+            전송
+          </Button>
+        </div>
       </div>
     </div>
   );

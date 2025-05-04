@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, use } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -9,9 +9,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { MapPin, Share2, MessageCircle } from "lucide-react"
 import { toast } from "@/components/ui/use-toast"
-import ChatComponent from "@/components/chat"
 import { useAuth } from "@/components/auth-provider"
-import axios, { AxiosResponse, AxiosError } from "axios"; // Import axios types
+import axios, { AxiosResponse, AxiosError } from "axios"; 
+import Link from 'next/link';
 
 // 스터디 타입 정의 (백엔드 DTO 기준)
 interface Study {
@@ -233,7 +233,15 @@ export default function StudyDetailPage({ params }: { params: Promise<{ id: stri
         <TabsList className="mb-6">
           <TabsTrigger value="info">스터디 정보</TabsTrigger>
           <TabsTrigger value="members">멤버 ({study.members.length})</TabsTrigger>
-          {isJoined && <TabsTrigger value="chat">채팅</TabsTrigger>}
+          {isJoined ? (
+            <Link href={`/studies/${study.id}/chat`} passHref legacyBehavior>
+              <Button variant="ghost" className="w-full justify-center data-[state=active]:bg-muted data-[state=active]:text-foreground">
+                채팅
+              </Button>
+            </Link>
+          ) : (
+            <Button variant="ghost" className="w-full" disabled>채팅 (참여 후 이용 가능)</Button>
+          )}
         </TabsList>
 
         <TabsContent value="info">
@@ -285,23 +293,6 @@ export default function StudyDetailPage({ params }: { params: Promise<{ id: stri
             </CardContent>
           </Card>
         </TabsContent>
-                
-        {isJoined && (
-          <TabsContent value="chat" className="h-[600px]">
-            <Card className="h-full flex flex-col">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <MessageCircle className="h-5 w-5" />
-                  스터디 채팅
-                </CardTitle>
-                <CardDescription>스터디 멤버들과 실시간으로 대화하세요</CardDescription>
-              </CardHeader>
-              <CardContent className="flex-1 overflow-hidden p-0">
-                <ChatComponent studyId={study.id} studyTitle={study.title} />
-              </CardContent>
-            </Card>
-          </TabsContent>
-        )}
       </Tabs>
     </div>
   )
