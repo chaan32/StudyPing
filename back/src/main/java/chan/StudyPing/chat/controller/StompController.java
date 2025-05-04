@@ -32,6 +32,7 @@ public class StompController {
         chatService.saveMessage(roomId, chatMessageDto); // DB에 저장
 
         ObjectMapper mapper = new ObjectMapper();
+
         String message = mapper.writeValueAsString(chatMessageDto);
         redisPubSubService.publish("chat", message); //Redis 채널의 이름에 메세지를 전달 해주는 것
     }

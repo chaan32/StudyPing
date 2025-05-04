@@ -103,16 +103,11 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
             console.log('메시지 수신:', receivedMessage);
 
             // --- 중복 방지: 내가 보낸 메시지는 무시 ---
-            if (receivedMessage.senderId === user?.id) {
-              console.log("내가 보낸 메시지 수신 (무시):", receivedMessage.content);
-              // 서버에서 온 타임스탬프 등으로 업데이트가 필요하다면 여기서 처리 가능
-              // 예: setMessages(prev => prev.map(m => m.tempId === receivedMessage.tempId ? receivedMessage : m));
-              // 지금은 단순히 무시합니다.
+            if (Number(receivedMessage.senderId) === Number(user?.id)) {
               return;
             }
-            // ---------------------------------------
 
-            // 다른 사용자의 메시지만 추가
+            // 모든 수신 메시지를 상태에 추가 (중복 제거 로직 제거됨)
             setMessages((prevMessages: ChatMessage[]) => [...prevMessages, receivedMessage]);
 
           } catch (error) {
@@ -218,10 +213,10 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
 
       // 4. 서버로 전송할 메시지 준비 (백엔드 DTO 구조에 맞게)
       const messageToSend = {
-         senderId: Number(user.id),
-         senderName: user.name,
-         content: optimisticMessage.content, // trim된 내용 사용
-         // roomId는 서버의 @DestinationVariable 또는 @MessageMapping 에서 처리
+        senderId: Number(user.id),
+        senderName: user.name,
+        content: optimisticMessage.content, // trim된 내용 사용
+        // roomId는 서버의 @DestinationVariable 또는 @MessageMapping 에서 처리
       };
 
       try {
@@ -277,7 +272,8 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
         {isLoadingHistory && <p className="text-center text-gray-500">이전 대화 기록을 불러오는 중...</p>}
         {messages.map((msg: ChatMessage, index: number) => {
           // 현재 사용자의 메시지인지 판단 (senderId 기준으로 통일)
-          const isCurrentUser = msg.senderId === user?.id;
+          // 타입을 숫자로 통일하여 비교
+          const isCurrentUser = Number(msg.senderId) === Number(user?.id);
 
           return (
           <div key={index} className={`flex items-start gap-3 mb-3 ${isCurrentUser ? 'justify-end' : ''}`}>
