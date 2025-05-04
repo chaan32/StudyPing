@@ -33,7 +33,7 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
   const actualParams = use(params);
   const studyId = Number(actualParams.id);
 
-  const { user, token, isLoading: isAuthLoading } = useAuth();
+  const { user, token, isLoading: isAuthLoading, fetchJoinedChatRooms } = useAuth();
   const [study, setStudy] = useState<Study | null>(null); // 스터디 제목 등 표시용
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [newMessage, setNewMessage] = useState("");
@@ -100,8 +100,6 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
         client.subscribe(`/topic/chat/study/${studyId}`, (message: IMessage) => {
           try {
             const receivedMessage: ChatMessage = JSON.parse(message.body);
-            console.log('메시지 수신:', receivedMessage);
-
             // --- 중복 방지: 내가 보낸 메시지는 무시 ---
             if (Number(receivedMessage.senderId) === Number(user?.id)) {
               return;
@@ -192,7 +190,60 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
     fetchHistoryAndMarkRead();
 
   }, [studyId, token, isAuthLoading, user?.id]);
-  // --- useEffect 종료 ---
+
+  // --- 추가된 useEffect: 채팅방 읽음 표시 및 navbar 갱신 ---
+  useEffect(() => {
+    const markAsReadAndRefreshNavbar = async () => {
+      if (studyId && token) {
+        console.log(`[ChatPage] Attempting to mark room ${studyId} as read.`);
+        try {
+          await axios.post(
+            `/api/chat/read/${studyId}`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          console.log(`[ChatPage] Successfully marked room ${studyId} as read.`);
+          // Refresh the chat list in the navbar after marking as read
+          fetchJoinedChatRooms();
+          console.log('[ChatPage] Called fetchJoinedChatRooms to update navbar.');
+        } catch (error) {
+          console.error(`[ChatPage] Failed to mark room ${studyId} as read:`, error);
+          if (axios.isAxiosError(error)) {
+            console.error("[ChatPage] Axios error details:", error.response?.data);
+          }
+        }
+      } else {
+        console.log('[ChatPage] Cannot mark as read: studyId or token missing.');
+      }
+    };
+
+    markAsReadAndRefreshNavbar();
+  }, [studyId, token, fetchJoinedChatRooms]);
+
+  // Scroll to bottom logic
+  const scrollToBottom = () => {
+    if (scrollAreaRef.current) {
+      console.log('Attempting to scroll...'); // 로그 추가
+      // Use requestAnimationFrame for smoother scrolling after DOM update
+      requestAnimationFrame(() => {
+        if (scrollAreaRef.current) {
+          const { scrollTop, scrollHeight, clientHeight } = scrollAreaRef.current;
+          console.log('Scroll Refs:', { scrollTop, scrollHeight, clientHeight }); // 로그 추가
+          scrollAreaRef.current.scrollTop = scrollAreaRef.current.scrollHeight;
+          console.log('New scrollTop:', scrollAreaRef.current.scrollTop); // 로그 추가
+        }
+      });
+    }
+  };
+
+  // Scroll when messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]); // 이 훅이 기록 로드 및 새 메시지 수신 시 스크롤 담당
 
   // 메시지 전송 핸들러
   const sendMessage = () => {
@@ -242,16 +293,6 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
     }
   };
 
-   // 새 메시지 수신 시 스크롤 맨 아래로 이동
-  useEffect(() => {
-    if (scrollAreaRef.current) {
-      const scrollElement = scrollAreaRef.current.querySelector('div'); // ScrollArea 내부의 div 찾기
-      if (scrollElement) {
-        scrollElement.scrollTop = scrollElement.scrollHeight;
-      }
-    }
-  }, [messages]);
-
   // 로딩 상태 또는 스터디 정보 없을 때 UI
   if (!study) {
     return (
@@ -268,35 +309,39 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
       <p className="mb-2 text-sm text-gray-600">
         연결 상태: {isConnected ? <span className="text-green-600 font-semibold">연결됨</span> : <span className="text-red-600 font-semibold">연결 끊김</span>}
       </p>
-      <ScrollArea className="flex-grow border rounded-md p-4 mb-4 bg-gray-50" ref={scrollAreaRef}>
-        {isLoadingHistory && <p className="text-center text-gray-500">이전 대화 기록을 불러오는 중...</p>}
-        {messages.map((msg: ChatMessage, index: number) => {
-          // 현재 사용자의 메시지인지 판단 (senderId 기준으로 통일)
-          // 타입을 숫자로 통일하여 비교
-          const isCurrentUser = Number(msg.senderId) === Number(user?.id);
+      {/* Attach the ref directly to ScrollArea and add h-full */}
+      <ScrollArea className="flex-grow h-full border rounded-md p-4 mb-4 bg-gray-50" ref={scrollAreaRef}>
+        {/* Remove the inner div with ref */}
+        {/* <div ref={scrollAreaRef} className="h-full w-full overflow-y-auto"> */}
+          {isLoadingHistory && <p className="text-center text-gray-500">이전 대화 기록을 불러오는 중...</p>}
+          {messages.map((msg: ChatMessage, index: number) => {
+            // 현재 사용자의 메시지인지 판단 (senderId 기준으로 통일)
+            // 타입을 숫자로 통일하여 비교
+            const isCurrentUser = Number(msg.senderId) === Number(user?.id);
 
-          return (
-          <div key={index} className={`flex items-start gap-3 mb-3 ${isCurrentUser ? 'justify-end' : ''}`}>
-            {!isCurrentUser && (
-              <Avatar className="h-8 w-8">
-                <AvatarFallback>{msg.senderName ? msg.senderName.slice(0, 1).toUpperCase() : '?'}</AvatarFallback>
-              </Avatar>
-            )}
-            <div className={`p-3 rounded-lg max-w-[70%] ${isCurrentUser ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-              {!isCurrentUser && <p className="text-xs font-semibold mb-1">{msg.senderName}</p>}
-              <p className="text-sm">{msg.content}</p>
-              {/* timestamp 표시 (옵션) */}
-              {msg.timestamp && <p className="text-xs text-right mt-1 opacity-70">{new Date(msg.timestamp).toLocaleTimeString()}</p>}
+            return (
+            <div key={index} className={`flex items-start gap-3 mb-3 ${isCurrentUser ? 'justify-end' : ''}`}>
+              {!isCurrentUser && (
+                <Avatar className="h-8 w-8">
+                  <AvatarFallback>{msg.senderName ? msg.senderName.slice(0, 1).toUpperCase() : '?'}</AvatarFallback>
+                </Avatar>
+              )}
+              <div className={`p-3 rounded-lg max-w-[70%] ${isCurrentUser ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                {!isCurrentUser && <p className="text-xs font-semibold mb-1">{msg.senderName}</p>}
+                <p className="text-sm">{msg.content}</p>
+                {/* timestamp 표시 (옵션) */}
+                {msg.timestamp && <p className="text-xs text-right mt-1 opacity-70">{new Date(msg.timestamp).toLocaleTimeString()}</p>}
+              </div>
+              {/* 현재 유저 아바타 (오른쪽, 옵션) */}
+              {/* {isCurrentUser && (
+                <Avatar className="h-8 w-8">
+                  <AvatarFallback>{user?.name ? user.name.slice(0, 1).toUpperCase() : '?'}</AvatarFallback>
+                </Avatar>
+              )} */}
             </div>
-            {/* 현재 유저 아바타 (오른쪽, 옵션) */}
-            {/* {isCurrentUser && (
-              <Avatar className="h-8 w-8">
-                <AvatarFallback>{user?.name ? user.name.slice(0, 1).toUpperCase() : '?'}</AvatarFallback>
-              </Avatar>
-            )} */}
-          </div>
-          );
-        })}
+            );
+          })}
+        {/* </div> */}
       </ScrollArea>
 
       {/* Message Input and Send Button Area - Separated */}

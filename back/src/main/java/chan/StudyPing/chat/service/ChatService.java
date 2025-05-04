@@ -198,4 +198,14 @@ public class ChatService {
         }
     }
     private String getEmailFromAuth(){return SecurityContextHolder.getContext().getAuthentication().getName();}
+
+    public Long getUnReadMessage(ChatRoom chatRoom, Member member){
+        Long count = 0L;
+        for (ReadStatus readStatus : readStatusRepository.findByChatRoomAndMember(chatRoom, member)) {
+            if (readStatus.getIsRead() == Boolean.FALSE) {
+                count++;
+            }
+        }
+        return count;
+    }
 }

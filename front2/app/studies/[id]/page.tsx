@@ -19,12 +19,10 @@ interface Study {
   title: string;
   description: string;
   category: string;
-  // memberCount: number;
-  // maxMembers: number;
-  currentParticipants: number; // 필드명 수정
-  maxParticipants: number; // 필드명 수정
+  currentParticipants: number;
+  maxParticipants: number;
   members: Member[];
-  createdAt?: string; // 생성일 추가 (백엔드에서 제공한다면)
+  createdAt?: string;
 }
 
 // 멤버 타입 정의 (백엔드 DTO 기준)
@@ -44,39 +42,62 @@ export default function StudyDetailPage({ params }: { params: Promise<{ id: stri
   const [loading, setLoading] = useState(true);
   const [joining, setJoining] = useState(false);
 
-  // 스터디 정보 가져오기
+  // 스터디 정보 및 참여 멤버 정보 가져오기
   useEffect(() => {
+    setLoading(true);
     const token = localStorage.getItem("accessToken");
-    axios.get(`http://localhost:8080/study/find/id/${studyId}`,{
+
+    // 1. 스터디 기본 정보 가져오기
+    axios.get<{ study: Study; message: string }>(`http://localhost:8080/study/find/id/${studyId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       },
       withCredentials: true
-    }) // API 엔드포인트 수정
-      .then((response: AxiosResponse<{ study: Study; message: string }>) => { // 응답 구조 반영
+    })
+      .then(response => {
         const fetchedStudy = response.data.study;
         setStudy(fetchedStudy);
 
-        // 참여 여부 확인 (로그인 상태이고 멤버 목록에 포함되어 있는지)
-        if (localStorage.getItem("isLoggedIn") === "true") {
-          setIsJoined(true);
+        // 2. 로그인 상태 확인 및 참여 멤버 ID 가져오기
+        if (user && user.id) {
+          axios.get<{ joinedMemberId: number[] }>(`http://localhost:8080/study/find/joined/member/${studyId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            },
+            withCredentials: true
+          })
+            .then(joinedMembersResponse => {
+              const joinedMemberIds = joinedMembersResponse.data.joinedMemberId;
+              // 참여 여부 확인
+              if (joinedMemberIds && joinedMemberIds.includes(Number(user.id))) {
+                setIsJoined(true);
+              } else {
+                setIsJoined(false);
+              }
+              setLoading(false); // 두 번째 호출 성공 후 로딩 완료
+            })
+            .catch(joinedMembersError => {
+              console.error('스터디 참여 멤버 정보를 불러오는데 실패했습니다:', joinedMembersError);
+              setIsJoined(false); // 참여 멤버 조회 실패 시 참여 안 한 것으로 간주
+              setLoading(false); // 두 번째 호출 실패 시에도 로딩 완료
+            });
         } else {
+          // 로그인하지 않은 사용자
           setIsJoined(false);
+          setLoading(false); // 첫 번째 호출 성공 후 로딩 완료
         }
-
-        setLoading(false);
       })
       .catch((error: unknown) => {
         console.error('스터디 정보를 불러오는데 실패했습니다:', error);
-        if (axios.isAxiosError(error)) {
-          // Axios 에러 처리
-        } else {
-          // 기타 에러 처리
-        }
-        setLoading(false);
-        router.push('/studies');
+        setStudy(null);
+        setIsJoined(false);
+        setLoading(false); // 첫 번째 호출 실패 시 로딩 완료
+        // 에러 메시지 표시 및 리디렉션 등
+        toast({ title: "오류", description: "스터디 정보를 불러올 수 없습니다.", variant: "destructive" });
+        // router.push('/studies');
       });
-  }, [studyId, user, router]) // 의존성 배열에 studyId 와 user 추가 (user는 참여여부 확인에 사용)
+
+  }, [studyId, user, router]); // token 제거
 
   // 스터디 참여 핸들러
   const handleJoin = async () => {
@@ -166,6 +187,30 @@ export default function StudyDetailPage({ params }: { params: Promise<{ id: stri
     }
   }
 
+  const renderJoinButton = () => {
+    if (!study) return null;
+
+    if (isJoined) {
+      return (
+        <Button variant="outline" disabled>
+          참여 중
+        </Button>
+      );
+    } else if (study.currentParticipants >= study.maxParticipants) {
+      return (
+        <Button variant="outline" disabled>
+          정원 마감
+        </Button>
+      );
+    } else {
+      return (
+        <Button onClick={handleJoin} disabled={joining || !user}> 
+          {joining ? "참여 처리 중..." : "스터디 참여하기"}
+        </Button>
+      );
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[60vh]">
@@ -194,38 +239,27 @@ export default function StudyDetailPage({ params }: { params: Promise<{ id: stri
   });
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="flex justify-between items-start mb-6">
+    <div className="max-w-4xl mx-auto p-4 md:p-6">
+      <div className="flex justify-between items-start mb-6 flex-wrap gap-4">
         <div>
-          <h1 className="text-3xl font-bold">{study.title}</h1>
-          <div className="flex items-center gap-2 mt-2">
-            <Badge variant="outline">{study.category}</Badge>
-            <span className="text-sm text-gray-500">
-              멤버: {study.currentParticipants}/{study.maxParticipants}
+          <h1 className="text-3xl font-bold mb-1">{study.title}</h1>
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+            <Badge variant="secondary">{study.category}</Badge>
+            <span className="flex items-center gap-1">
+              <MapPin className="h-4 w-4" /> 위치 미정
             </span>
+            <span>{study.currentParticipants}/{study.maxParticipants}명</span>
+            {study.createdAt && (
+              <span className="text-xs">개설일: {new Date(study.createdAt).toLocaleDateString()}</span>
+            )}
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
+          {renderJoinButton()}
+
           <Button variant="outline" size="icon" onClick={handleShare}>
             <Share2 className="h-4 w-4" />
           </Button>
-          {/* 조건부 렌더링 시작 */}
-          {!isJoined && study.currentParticipants < study.maxParticipants && (
-            <Button onClick={handleJoin} disabled={joining}>
-              {joining ? "참여 중..." : "스터디 참여하기"}
-            </Button>
-          )}
-          {isJoined && (
-            <Button variant="outline" disabled>
-              참여 중
-            </Button>
-          )}
-          {!isJoined && study.currentParticipants >= study.maxParticipants && (
-            <Button variant="outline" disabled>
-              모집 마감
-            </Button>
-          )}
-          {/* 조건부 렌더링 끝 */}
         </div>
       </div>
 

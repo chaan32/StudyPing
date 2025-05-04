@@ -8,8 +8,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge"
 import { Users, MessageCircle } from "lucide-react"
 import { useAuth } from "@/components/auth-provider"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import ChatComponent from "@/components/chat"
 import axios, { AxiosResponse, AxiosError } from 'axios'; // Import axios types
 
 // 스터디 타입 정의 (백엔드 API 응답 기준 - StudyResDto 가정)
@@ -30,10 +28,6 @@ export default function MyStudiesPage() {
   const { user, isLoading } = useAuth()
   const [studies, setStudies] = useState<Study[]>([])
   const [loading, setLoading] = useState(true)
-
-  // 채팅 관련 상태
-  const [chatOpen, setChatOpen] = useState(false)
-  const [selectedStudy, setSelectedStudy] = useState<Study | null>(null)
 
   // 로그인 상태 확인
   useEffect(() => {
@@ -75,12 +69,6 @@ export default function MyStudiesPage() {
   useEffect(() => {
     console.log('Studies 상태 업데이트됨:', studies);
   }, [studies]);
-
-  // 채팅방 열기 핸들러
-  const openChat = (study: Study) => {
-    setSelectedStudy(study)
-    setChatOpen(true)
-  }
 
   // 로딩 중이거나 로그인되지 않은 경우
   if (isLoading || !user) {
@@ -135,9 +123,12 @@ export default function MyStudiesPage() {
                   </span>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" onClick={() => openChat(study)}>
-                    <MessageCircle className="h-4 w-4 mr-1" />
-                    채팅
+                  {/* Link to the dedicated chat page */}
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href={`/studies/${study.id}/chat`} passHref>
+                      <MessageCircle className="h-4 w-4 mr-1" />
+                      채팅
+                    </Link>
                   </Button>
                   <Button variant="ghost" size="sm" asChild>
                     <Link href={`/studies/${study.id}`} passHref>자세히 보기</Link>
@@ -155,19 +146,6 @@ export default function MyStudiesPage() {
           </Button>
         </div>
       )}
-
-      {/* 채팅 다이얼로그 */}
-      <Dialog open={chatOpen} onOpenChange={setChatOpen}>
-        <DialogContent className="sm:max-w-[500px] h-[80vh] flex flex-col">
-          <DialogHeader>
-            <DialogTitle>{selectedStudy?.title} 채팅방</DialogTitle>
-            <DialogDescription>스터디 멤버들과 실시간으로 대화하세요</DialogDescription>
-          </DialogHeader>
-          <div className="flex-1 overflow-hidden">
-            {selectedStudy && <ChatComponent studyId={selectedStudy.id} studyTitle={selectedStudy.title} />}
-          </div>
-        </DialogContent>
-      </Dialog>
     </div>
   )
 }
