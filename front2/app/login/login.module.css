@@ -1,0 +1,90 @@
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+}
+
+.title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 2rem; /* Larger title */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Form takes full width of container */
+}
+
+.inputGroup {
+  margin-bottom: 20px; /* Increased spacing */
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 8px; /* Increased spacing */
+  color: #555;
+  font-weight: bold;
+}
+
+.input {
+  width: 100%;
+  padding: 12px; /* Larger padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; 
+  font-size: 1rem; /* Standard font size */
+}
+
+.input::placeholder {
+  color: #aaa;
+}
+
+.button {
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; /* Add some space above the button */
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: #dc3545; /* Bootstrap danger color */
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+  width: 100%; /* Error takes full width */
+}
+
+.signupLink {
+  margin-top: 25px;
+  text-align: center;
+  color: #555;
+}
+
+.signupLink a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signupLink a:hover {
+  text-decoration: underline;
+}

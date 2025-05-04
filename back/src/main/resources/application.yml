@@ -10,9 +10,9 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create  # ?? ?? update, ???? validate ?? none
+      ddl-auto: validate  # ?? ?? update, ???? validate ?? none # update -> validate 로 변경
     show-sql: true
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MariaDBDialect
 
   # UTF-8 ?? (??)
   servlet:
@@ -36,3 +36,9 @@ jwt:
 #studypingaccesstokenstudypingaccesstokenstudypingaccesstokenstudypingaccesstokenstudypingaccesstokenstudypingaccesstokenstudypingaccesstoken
   secretKey: c3R1ZHlwaW5nYWNjZXNzdG9rZW5zdHVkeXBpbmdhY2Nlc3N0b2tlbnN0dWR5cGluZ2FjY2Vzc3Rva2Vuc3R1ZHlwaW5nYWNjZXNzdG9rZW5zdHVkeXBpbmdhY2Nlc3N0b2tlbnN0dWR5cGluZ2FjY2Vzc3Rva2Vuc3R1ZHlwaW5nYWNjZXNzdG9rZW4=
   expiration: 3000
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG # Spring Security ??? ??? ???

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -28,14 +29,27 @@ public class JwtAuthFilter extends GenericFilter {
     @Value("${jwt.secretKey}")
     private String secretKey;
 
+    // Define permitAll paths based on SecurityConfigs
+    private final List<String> permitAllPaths = Arrays.asList("/test", "/member/login", "/member/create", "/connect");
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+        String requestURI = httpServletRequest.getRequestURI();
+
+        // Check if the request path should bypass authentication
+        boolean isPermitAllPath = permitAllPaths.stream().anyMatch(path -> requestURI.startsWith(path));
+
+        if (isPermitAllPath) {
+            chain.doFilter(request, response); // Bypass JWT validation for permitAll paths
+            return;
+        }
+
         String token = httpServletRequest.getHeader("Authorization");
 
         try{
-            if (token!=null){ // 토큰이 있는 경우
+            if (token != null){ // 토큰이 있는 경우 (and path requires authentication)
                 if (!token.substring(0, 7).equals("Bearer ")){
                     log.info("input token : {}", token);
                     throw new AuthenticationServiceException("Bearer 형식이 ㄴㄴ");
