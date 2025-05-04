@@ -166,7 +166,7 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
           senderId: dto.senderId, // senderEmail 대신 senderId 사용 (백엔드 확인 필요)
           senderName: dto.senderName,
           content: dto.content,
-          // timestamp: dto.timestamp
+          timestamp: dto.timestamp // 주석 해제
         }));
 
         console.log("History loaded:", mappedHistories);
