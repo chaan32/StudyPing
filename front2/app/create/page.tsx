@@ -42,7 +42,6 @@ interface Study {
 
 export default function CreateStudyPage() {
   const router = useRouter()
-  const token = localStorage.getItem("accessToken");
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
@@ -68,8 +67,29 @@ export default function CreateStudyPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
+    // Retrieve token right before submitting
+    const token = localStorage.getItem("accessToken");
+    const userId = localStorage.getItem("userId"); // Also get userId here if needed elsewhere
+
+    // Validate token existence
+    if (!token) {
+      toast({
+        title: "인증 오류",
+        description: "로그인이 필요합니다. 로그인 후 다시 시도해주세요.",
+        variant: "destructive",
+      });
+      setLoading(false); // Ensure loading is stopped
+      return;
+    }
+
+    // Update formData with the latest userId just before submit
+    const updatedFormData = {
+        ...formData,
+        makerId: Number(userId) // Ensure makerId uses the latest userId
+    };
+
     // 유효성 검사
-    if (!formData.title || !formData.description || !formData.category || !formData.location) {
+    if (!updatedFormData.title || !updatedFormData.description || !updatedFormData.category || !updatedFormData.location) {
       toast({
         title: "입력 오류",
         description: "모든 필수 항목을 입력해주세요.",
@@ -81,14 +101,18 @@ export default function CreateStudyPage() {
     setLoading(true)
 
     try {
+      // Log the token and formData before sending the request
+      console.log("Submitting study creation with:");
+      console.log("Token:", token); // Log the token fetched inside handleSubmit
+      console.log("FormData:", updatedFormData); // Log the updated form data
+
       // 실제 구현에서는 axios를 사용하여 백엔드로 데이터를 전송합니다
-      axios.post('http://localhost:8080/study/create', formData, {
+      axios.post('http://localhost:8080/study/create', updatedFormData, { // Use updatedFormData
         headers: {
           Authorization: `Bearer ${token}`
         },
         withCredentials: true
       })
-
 
       toast({
         title: "스터디 생성 완료",

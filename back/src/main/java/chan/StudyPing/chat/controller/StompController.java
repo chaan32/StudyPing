@@ -24,8 +24,8 @@ public class StompController {
     @MessageMapping("/{roomId}")
     public void sendMessage(@DestinationVariable Long roomId, ChatMessageDto chatMessageDto) throws JsonProcessingException {
 
-        log.info("📨 메시지 수신 - roomId: {}, sender: {}, message: {}",
-                roomId, chatMessageDto.getSenderId(), chatMessageDto.getMessage());
+        log.info("📨 메시지 수신 - roomId: {}, senderId: {} senderName: {}, message: {}",
+                roomId, chatMessageDto.getSenderId(), chatMessageDto.getSenderName(), chatMessageDto.getContent());
 
         chatMessageDto.setRoomId(roomId);  // ChatMessageDto : roomId ❌ -> DestinationVar 에서 받아서 넣어 줘야 함
 

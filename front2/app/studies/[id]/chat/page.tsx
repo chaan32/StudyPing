@@ -13,10 +13,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 // 메시지 타입 정의 (백엔드와 일치 필요)
 interface ChatMessage {
-  senderId: number;
+  // WebSocket은 senderId 제공, History는 senderEmail 제공 가정
+  senderId?: number;       // WebSocket 메시지용 (Optional)
+  senderEmail?: string;    // History API 메시지용 (Optional)
   senderName: string;
   content: string;
-  timestamp: string; // ISO 8601 형식 또는 원하는 형식
+  timestamp?: string;      // Optional: ISO 8601 형식 또는 원하는 형식
 }
 
 // 스터디 정보 타입 (필요한 부분만 유지)
@@ -38,6 +40,7 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
   const [isConnected, setIsConnected] = useState(false);
   const stompClientRef = useRef<Client | null>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null); // 스크롤 제어용
+  const [isLoadingHistory, setIsLoadingHistory] = useState(false); // 히스토리 로딩 상태 추가
 
   // 스터디 기본 정보 로딩 (채팅방 제목 등에 사용)
   useEffect(() => {
@@ -98,7 +101,20 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
           try {
             const receivedMessage: ChatMessage = JSON.parse(message.body);
             console.log('메시지 수신:', receivedMessage);
+
+            // --- 중복 방지: 내가 보낸 메시지는 무시 ---
+            if (receivedMessage.senderId === user?.id) {
+              console.log("내가 보낸 메시지 수신 (무시):", receivedMessage.content);
+              // 서버에서 온 타임스탬프 등으로 업데이트가 필요하다면 여기서 처리 가능
+              // 예: setMessages(prev => prev.map(m => m.tempId === receivedMessage.tempId ? receivedMessage : m));
+              // 지금은 단순히 무시합니다.
+              return;
+            }
+            // ---------------------------------------
+
+            // 다른 사용자의 메시지만 추가
             setMessages((prevMessages: ChatMessage[]) => [...prevMessages, receivedMessage]);
+
           } catch (error) {
             console.error("메시지 처리 중 오류 발생:", error, message.body);
           }
@@ -133,25 +149,93 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
     };
   }, [studyId, user, token, isAuthLoading]); // studyId나 user가 변경되면 재연결
 
+  // --- 추가된 useEffect: 채팅 기록 로드 및 읽음 처리 ---
+  useEffect(() => {
+    if (!studyId || !token || isAuthLoading || !user?.id) {
+      console.log("History/Read: Waiting for studyId, token, auth, or user id.");
+      return; // 필요한 정보가 없으면 실행 중지
+    }
+
+    const fetchHistoryAndMarkRead = async () => {
+      setIsLoadingHistory(true);
+      try {
+        // 1. 이전 메시지 조회
+        console.log(`Fetching history for room: ${studyId}`);
+        console.log("Using token for history API:", token);
+        const historyResponse = await axios.get<{ histories: any[] }>(`/api/chat/history/${studyId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        // 백엔드 DTO (senderId, senderName, content) -> 프론트엔드 ChatMessage 매핑
+        const mappedHistories: ChatMessage[] = historyResponse.data.histories.map(dto => ({
+          senderId: dto.senderId, // senderEmail 대신 senderId 사용 (백엔드 확인 필요)
+          senderName: dto.senderName,
+          content: dto.content,
+          // timestamp: dto.timestamp
+        }));
+
+        console.log("History loaded:", mappedHistories);
+        // 이전 메시지를 현재 메시지 목록 앞에 추가
+        setMessages(prevMessages => [...mappedHistories, ...prevMessages]);
+
+        // 2. 읽음 처리 요청
+        console.log(`Marking messages as read for room: ${studyId}`);
+        console.log("Using token for read API:", token);
+        await axios.post(`/api/chat/read/${studyId}`, {}, { // POST 요청이지만 body는 비워둠
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log("Messages marked as read.");
+
+      } catch (error) {
+        console.error("Error fetching history or marking read:", error);
+        // TODO: 사용자에게 오류 알림 표시
+      } finally {
+        setIsLoadingHistory(false);
+      }
+    };
+
+    fetchHistoryAndMarkRead();
+
+  }, [studyId, token, isAuthLoading, user?.id]);
+  // --- useEffect 종료 ---
+
   // 메시지 전송 핸들러
   const sendMessage = () => {
     if (newMessage.trim() && stompClientRef.current?.connected && user && studyId) {
-      const chatMessage: Omit<ChatMessage, 'timestamp'> = { // timestamp는 서버에서 설정 가정
+      // 1. Optimistic UI를 위한 메시지 객체 생성
+      const optimisticMessage: ChatMessage = {
         senderId: Number(user.id),
         senderName: user.name,
         content: newMessage.trim(),
+        timestamp: new Date().toISOString(), // 임시 타임스탬프
       };
+
+      // 2. 화면에 즉시 반영 (Optimistic Update)
+      setMessages((prevMessages) => [...prevMessages, optimisticMessage]);
+
+      // 3. 입력 필드 비우기
+      setNewMessage("");
+
+      // 4. 서버로 전송할 메시지 준비 (백엔드 DTO 구조에 맞게)
+      const messageToSend = {
+         senderId: Number(user.id),
+         senderName: user.name,
+         content: optimisticMessage.content, // trim된 내용 사용
+         // roomId는 서버의 @DestinationVariable 또는 @MessageMapping 에서 처리
+      };
+
       try {
+          // 5. 서버로 메시지 전송 (STOMP publish)
           stompClientRef.current.publish({
-            destination: `/publish/chat/study/${studyId}`, // 메시지 발행 엔드포인트 (/publish)
-            body: JSON.stringify(chatMessage),
-            // headers: { 'priority': '9' } // 필요한 경우 헤더 추가
+            destination: `/publish/${studyId}`,
+            body: JSON.stringify(messageToSend),
           });
-          console.log('메시지 발송:', chatMessage);
-          setNewMessage("");
+          console.log('메시지 발송 (서버로):', messageToSend);
+
       } catch (error) {
           console.error("메시지 발송 실패:", error);
-          // 사용자에게 오류 알림
+          // TODO: 실패 시 Optimistic 업데이트 롤백 처리 (예: 임시 메시지 제거)
+          // 예: setMessages(prev => prev.filter(msg => msg.timestamp !== optimisticMessage.timestamp));
       }
     } else {
       console.warn("메시지 발송 불가 - 연결 상태 확인 또는 메시지 입력 필요", {
@@ -190,25 +274,33 @@ export default function StudyChatPage({ params }: { params: Promise<{ id: string
         연결 상태: {isConnected ? <span className="text-green-600 font-semibold">연결됨</span> : <span className="text-red-600 font-semibold">연결 끊김</span>}
       </p>
       <ScrollArea className="flex-grow border rounded-md p-4 mb-4 bg-gray-50" ref={scrollAreaRef}>
-        {messages.map((msg: ChatMessage, index: number) => (
-          <div key={index} className={`flex items-start gap-3 mb-3 ${msg.senderId === user?.id ? 'justify-end' : ''}`}>
-            {msg.senderId !== user?.id && (
+        {isLoadingHistory && <p className="text-center text-gray-500">이전 대화 기록을 불러오는 중...</p>}
+        {messages.map((msg: ChatMessage, index: number) => {
+          // 현재 사용자의 메시지인지 판단 (senderId 기준으로 통일)
+          const isCurrentUser = msg.senderId === user?.id;
+
+          return (
+          <div key={index} className={`flex items-start gap-3 mb-3 ${isCurrentUser ? 'justify-end' : ''}`}>
+            {!isCurrentUser && (
               <Avatar className="h-8 w-8">
                 <AvatarFallback>{msg.senderName ? msg.senderName.slice(0, 1).toUpperCase() : '?'}</AvatarFallback>
               </Avatar>
             )}
-            <div className={`p-3 rounded-lg max-w-[70%] ${msg.senderId === user?.id ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-              {msg.senderId !== user?.id && <p className="text-xs font-semibold mb-1">{msg.senderName}</p>}
+            <div className={`p-3 rounded-lg max-w-[70%] ${isCurrentUser ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+              {!isCurrentUser && <p className="text-xs font-semibold mb-1">{msg.senderName}</p>}
               <p className="text-sm">{msg.content}</p>
-              <p className="text-xs text-right mt-1 opacity-70">{new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+              {/* timestamp 표시 (옵션) */}
+              {msg.timestamp && <p className="text-xs text-right mt-1 opacity-70">{new Date(msg.timestamp).toLocaleTimeString()}</p>}
             </div>
-            {msg.senderId === user?.id && (
+            {/* 현재 유저 아바타 (오른쪽, 옵션) */}
+            {/* {isCurrentUser && (
               <Avatar className="h-8 w-8">
-                <AvatarFallback>{user.name ? user.name.slice(0, 1).toUpperCase() : '?'}</AvatarFallback>
+                <AvatarFallback>{user?.name ? user.name.slice(0, 1).toUpperCase() : '?'}</AvatarFallback>
               </Avatar>
-            )}
+            )} */}
           </div>
-        ))}
+          );
+        })}
       </ScrollArea>
 
       {/* Message Input and Send Button Area - Separated */}
