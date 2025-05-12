@@ -87,6 +87,6 @@ StudyPing/
 - **WebSocket 인증**: 클라이언트는 WebSocket 연결 시 `Authorization` 헤더에 `Bearer {token}` 형식으로 JWT 토큰을 전송해야 합니다.
 - **JSON 직렬화**: 백엔드(`WebConfig.java`)에서 `JavaTimeModule`을 `ObjectMapper`에 등록하여 Java 8 날짜/시간 타입(예: `LocalDateTime`)을 올바르게 처리합니다.
 
-## 🤝 기여
+
 
 
